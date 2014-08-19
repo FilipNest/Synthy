@@ -151,7 +151,7 @@ synthy["osc"+osc].speaker.gain.value = 0;
     
 else{
     
-synthy["osc"+osc].speaker.gain.value = 0.005;
+synthy["osc"+osc].speaker.gain.value = 0.05;
     
 }
     

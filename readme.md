@@ -3,6 +3,8 @@ Synthy
 
 Colour and sound synthesiser made in JavaScript using the web audio API.
 
+[Try it here](http://filipnest.com/synthy/ "Synthy").
+
 User guide
 ----------
 

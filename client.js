@@ -2,8 +2,7 @@ var synthy = {};
         
 // create web audio api context
 synthy.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        
-        
+
 //Set maximum frequency
         
 synthy.top = 7902;
@@ -131,43 +130,64 @@ document.getElementById('osc'+osc).style.background = synthy.notes[note.note].co
     
 }
 
-// Trigger
+// Trigger single note
 
-synthy.trigger = function(osc,interval){
+synthy.trigger = function(osc, frequency, length, wait){
+    
+//Set wait time to 0 if not set
+    
+if(!wait){
 
-if(synthy["osc"+osc].trigger){
- 
-window.clearInterval(synthy["osc"+osc].trigger);
+var wait = 0;
     
 }
+
+//Start note
     
-synthy["osc"+osc].trigger = window.setInterval(function(){
+window.setTimeout(function(){
     
-if(synthy["osc"+osc].speaker.gain.value > 0){
- 
-synthy["osc"+osc].speaker.gain.value = 0;
-    
-}
-    
-else{
-    
+synthy.pitch(osc,frequency);
 synthy["osc"+osc].speaker.gain.value = 0.05;
     
-}
+},wait);
     
-},interval);
+};
+
+//Sequence
+
+synthy.sequence = function(osc,sequence){
+    
+//Set initial wait time
+    
+var wait = 0;
+    
+for (i=0; i<sequence.length; i+=1){
+    
+var pitch = sequence[i][0];
+var length = sequence[i][1]  
+
+synthy.trigger(osc,pitch,length,wait);
+
+wait += sequence[i][1]
+
+if(i === (sequence.length -1)){
+ 
+window.setTimeout(function(){
+    
+synthy["osc"+osc].speaker.gain.value = 0;
+
+synthy.sequence(osc,sequence);
+    
+},wait);
+    
+}
+
+}
 
 };
 
-//Trigger and pitch together
+synthy.play = function(){
 
-synthy.play = function(osc,frequency,trigger){
-    
-synthy.pitch(osc,frequency);
-
-if(trigger){
-synthy.trigger(osc,trigger);
-}
-
-return "Synthy has changed";
+return "Replaced with synthy.sequence()"; 
+  
 };

@@ -184,6 +184,8 @@ synthy.sequence(osc,sequence);
 
 }
 
+return "Synthy is playing";
+    
 };
 
 synthy.play = function(){

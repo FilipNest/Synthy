@@ -127,6 +127,8 @@ return chosen;
 
 synthy.colourchange = function(osc,note){
 document.getElementById('osc'+osc).style.background = synthy.notes[note.note].colour; 
+
+//document.getElementById('line'+osc).style.background = synthy.notes[note.note].colour; 
     
 }
 

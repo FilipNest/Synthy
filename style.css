@@ -4,3 +4,9 @@ body {height:100%; margin:auto; overflow:hidden;}
 #osc1 {width:32%; left:0; margin-right:1px;}
 #osc2 {margin-left:33%; width:34%;}
 #osc3 {width:32%; right:0; margin-left:1px;}
+h1 { font-family:"Los Alamos Pro Fat Man", sans-serif; font-size-adjust: 0.65; font-weight:bold; font-style:normal; display: inline-block; font-size:25px; height:18px; margin:0px;}
+.line {display:inline-block; width:5px; height:100%;}
+#line1 {background-color:red; }
+#line2 {background-color:green;}
+#line3 {background-color:blue;}
+header {width:100%; padding:5px;}

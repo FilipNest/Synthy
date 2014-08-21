@@ -3,8 +3,29 @@
 <head>
 <title>Synthy</title>
 <link rel="stylesheet" href="style.css"/>
+<script type="text/javascript">
+WebFontConfig = { fontdeck: { id: '48307' } };
+
+(function() {
+  var wf = document.createElement('script');
+  wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+  wf.type = 'text/javascript';
+  wf.async = 'true';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(wf, s);
+})();
+</script>
+
 </head>
 <body>
+<header><h1 id="one">
+Synthy
+<div id="line1" class="line"></div>
+<div id="line2" class="line"></div>
+<div id="line3" class="line"></div>
+</h1>
+</header>
 <div class="osc" id="osc1"></div>
 <div class="osc" id="osc2"></div>
 <div class="osc" id="osc3"></div>

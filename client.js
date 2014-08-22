@@ -245,6 +245,24 @@ $(osc).find(".waveform").append("<select><option>Sine</option><option>Saw</optio
  
 });
 
+$(".clonerow").on("click",function(){
+
+var osc = $(this).parent().attr("id").replace("build", "");
+
+var osc = $("#build"+osc);
+    
+var pitch = $(osc).find(".pitch").children().last().val();
+var length = $(osc).find(".length").children().last().val();
+var volume = $(osc).find(".volume").children().last().val();
+var waveform = $(osc).find(".waveform").children().last().val();
+
+$(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
+$(osc).find(".length").append("<input />").find("input").last().val(length);
+$(osc).find(".volume").append("<input />").find("input").last().val(volume);;
+$(osc).find(".waveform").append("<select><option>Sine</option><option>Saw</option><option>Square</option></select>").find("select").last().val(waveform);
+ 
+});
+
 //Get details from phrase builder
 
 $("#play").on("click",function(){

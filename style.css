@@ -1,13 +1,13 @@
 html {width:100%; height:100%; margin:auto; overflow:hidden;}
-body {height:100%; margin:auto; overflow:hidden; font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:25px; background:}
-.osc {height:100%; transition: background 20ms; width:100px; float:left; margin-right:20px; color:white;}
+body {height:100%; margin:auto; overflow:hidden; font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:25px; background-color:#333333;}
+.osc {height:100%; transition: background 20ms; width:10%; float:left; color:transparent; margin:0 5% 0 5%}
 h1 {font-size-adjust: 0.65; font-weight:bold; font-style:normal; font-size:120%; height:21px; margin:0px;}
 .line {display:inline-block; width:5px; height:100%;}
 #line1 {background-color:red; }
 #line2 {background-color:green;}
 #line3 {background-color:blue;}
-header {width:100%; padding:5px;}
-#phrasebuilder {position:absolute; padding:10px; background-color:white;}
+header {width:100%; padding:5px; background-color:white; margin-bottom:20px; height:28px;}
+#phrasebuilder {position:absolute; padding:10px; background-color:white; top:50px;}
 #phrasebuilder {text-align: center;}
 #phrasebuilder section {width:50px; float:left; line-height:30px;}
 #phrasebuilder h3 {font-size:85%; text-transform: uppercase; margin:0px; line-height:5px;}

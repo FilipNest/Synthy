@@ -158,8 +158,6 @@ synthy.osc3.speaker.gain.value = 0;
 
 synthy.restart = function(osc,sequence){
     
-synthy.stop();
-    
 //If not final, restart
     
 if(!synthy.final){
@@ -183,7 +181,7 @@ var wait = 0;
 //Start note
     
 synthy.timeouts.push(window.setTimeout(function(){
-    
+synthy.glow(osc,length);
 synthy.pitch(osc,frequency);
 synthy["osc"+osc].speaker.gain.value = 0.05;
     
@@ -280,6 +278,10 @@ synthy.seq[osc].push([parseInt(pitch),parseInt(length)]);
 
 getdata(1); getdata(2); getdata(3);
 
+console.log(synthy.seq[1]);
+console.log(synthy.seq[2]);
+console.log(synthy.seq[3]);
+    
 synthy.sequence(1,synthy.seq[1]);
 synthy.sequence(2,synthy.seq[2]);
 synthy.sequence(3,synthy.seq[3]);

@@ -167,7 +167,7 @@ synthy.sequence(osc,sequence);
 
 // Trigger single note
 
-synthy.trigger = function(osc, frequency, length, volume, wait){
+synthy.trigger = function(osc, frequency, length, volume, waveform, wait){
     
 if(volume > 1){
  
@@ -189,6 +189,7 @@ synthy.timeouts.push(window.setTimeout(function(){
 synthy.glow(osc,length);
 synthy.pitch(osc,frequency);
 synthy["osc"+osc].speaker.gain.value = volume;
+synthy["osc"+osc].type = waveform;
     
 },wait));
     
@@ -206,9 +207,10 @@ for (i=0; i<sequence.length; i+=1){
     
 var pitch = sequence[i][0];
 var length = sequence[i][1];
-var volume = sequence[i][2]
+var volume = sequence[i][2];
+var waveform = sequence[i][3];
 
-synthy.trigger(osc,pitch,length,volume,wait);
+synthy.trigger(osc,pitch,length,volume,waveform,wait);
 
 wait += sequence[i][1]
 
@@ -241,7 +243,7 @@ var osc = $("#build"+osc);
 $(osc).find(".pitch").append("<input />");
 $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
-$(osc).find(".waveform").append("<select><option>Sine</option><option>Saw</option><option>Square</option></select>");
+$(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option></select>");
  
 });
 
@@ -259,7 +261,7 @@ var waveform = $(osc).find(".waveform").children().last().val();
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);;
-$(osc).find(".waveform").append("<select><option>Sine</option><option>Saw</option><option>Square</option></select>").find("select").last().val(waveform);
+$(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option></select>").find("select").last().val(waveform);
  
 });
 
@@ -313,10 +315,10 @@ for(i=0; i<rows; i+=1){
 var pitch = $($(column).find(".pitch input")[i]).val();
 var length = $($(column).find(".length input")[i]).val();
 var volume = $($(column).find(".volume input")[i]).val();
-var waveform = $($(column).find(".waveform select")[i]).attr("value");
+var waveform = $($(column).find(".waveform select")[i]).val();
     
 if(pitch && length){
-synthy.seq[osc].push([parseFloat(pitch),parseFloat(length),parseFloat(volume)]);    
+synthy.seq[osc].push([parseFloat(pitch),parseFloat(length),parseFloat(volume),waveform]);    
 }
 }
    

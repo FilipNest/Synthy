@@ -127,14 +127,49 @@ return chosen;
 
 synthy.colourchange = function(osc,note){
 document.getElementById('osc'+osc).style.background = synthy.notes[note.note].colour; 
-
-//document.getElementById('line'+osc).style.background = synthy.notes[note.note].colour; 
     
 }
+
+//Timeouts
+
+synthy.timeouts = [];
+
+//On sequence end
+
+synthy.stop = function(){
+  
+//Delete trailing timeouts
+    
+synthy.timeouts.forEach(function(element,index){
+    
+window.clearTimeout(synthy.timeouts[index]);
+synthy.timeouts = [];
+    
+});
+    
+//Mute
+    
+synthy.osc1.speaker.gain.value = 0;
+synthy.osc2.speaker.gain.value = 0;
+synthy.osc3.speaker.gain.value = 0;
+    
+};
+
+synthy.restart = function(osc,sequence){
+    
+synthy.stop();
+    
+//If not final, restart
+    
+if(!synthy.final){
+synthy.sequence(osc,sequence);
+}    
+};
 
 // Trigger single note
 
 synthy.trigger = function(osc, frequency, length, wait){
+    
     
 //Set wait time to 0 if not set
     
@@ -143,15 +178,15 @@ if(!wait){
 var wait = 0;
     
 }
-
+    
 //Start note
     
-window.setTimeout(function(){
+synthy.timeouts.push(window.setTimeout(function(){
     
 synthy.pitch(osc,frequency);
 synthy["osc"+osc].speaker.gain.value = 0.05;
     
-},wait);
+},wait));
     
 };
 
@@ -174,26 +209,20 @@ wait += sequence[i][1]
 
 if(i === (sequence.length -1)){
  
-window.setTimeout(function(){
+synthy.timeouts.push(window.setTimeout(function(){
     
 synthy["osc"+osc].speaker.gain.value = 0;
-
-synthy.sequence(osc,sequence);
     
-},wait);
+synthy.restart(osc,sequence);
+   
+},wait));
     
 }
 
 }
 
 return "Synthy is playing";
-    
-};
 
-synthy.play = function(){
-
-return "Replaced with synthy.sequence()"; 
-  
 };
 
 //Make a new row in the phrase builder
@@ -211,7 +240,15 @@ $("#waveform").append("<select><option>Sine</option><option>Saw</option><option>
 //Get details from phrase builder
 
 $("#play").on("click",function(){
-
+  
+synthy.startphrase();
+    
+})
+    
+synthy.startphrase = function(){
+    
+synthy.final = false;
+    
 //Get amount of rows
 
 var rows = $("#pitch input").length;
@@ -236,4 +273,4 @@ synthy.sequence(1,synthy.seq[1]);
 synthy.sequence(2,synthy.seq[2]);
 synthy.sequence(3,synthy.seq[3]);
 
-});
+};

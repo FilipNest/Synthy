@@ -195,3 +195,45 @@ synthy.play = function(){
 return "Replaced with synthy.sequence()"; 
   
 };
+
+//Make a new row in the phrase builder
+
+$("#newrow").on("click",function(){
+
+$("#oscillator").append("<select><option value='1' selected='selected'>One</option><option value='2'>Two</option><option value='3'>Three</option></select>");
+$("#pitch").append("<input />");
+$("#length").append("<input />");
+$("#volume").append("<input />");
+$("#waveform").append("<select><option>Sine</option><option>Saw</option><option>Square</option></select>");
+ 
+});
+
+//Get details from phrase builder
+
+$("#play").on("click",function(){
+
+//Get amount of rows
+
+var rows = $("#pitch input").length;
+
+synthy.seq = {};
+synthy.seq["1"] = [];
+synthy.seq["2"] = [];
+synthy.seq["3"] = [];
+    
+for(i=0; i<rows; i+=1){
+ 
+var osc = $($("#oscillator select")[i]).val();
+var pitch = $($("#pitch input")[i]).val();
+var length = $($("#length input")[i]).val();
+var volume = $($("#volume input")[i]).val();
+var waveform = $($("#waveform select")[i]).attr("value");
+synthy.seq[osc].push([parseInt(pitch),parseInt(length)]);    
+  
+}
+
+synthy.sequence(1,synthy.seq[1]);
+synthy.sequence(2,synthy.seq[2]);
+synthy.sequence(3,synthy.seq[3]);
+
+});

@@ -126,7 +126,8 @@ return chosen;
 }
 
 synthy.colourchange = function(osc,note){
-document.getElementById('osc'+osc).style.background = synthy.notes[note.note].colour; 
+document.getElementById('osc'+osc).style.background = synthy.notes[note.note].colour;
+document.getElementById('osc'+osc).style.color = synthy.notes[note.note].colour;
     
 }
 
@@ -284,3 +285,16 @@ synthy.sequence(2,synthy.seq[2]);
 synthy.sequence(3,synthy.seq[3]);
 
 };
+
+//Glow synthy, glow
+
+synthy.glow = function(osc,ms){
+
+var osc = $("#osc"+osc);
+    
+$(osc).css("transition","box-shadow"+" "+ms/2+"ms").removeClass("off").addClass("on");
+    
+window.setTimeout(function(){
+$(osc).removeClass("on").addClass("off");
+},ms/2)
+}

@@ -167,9 +167,14 @@ synthy.sequence(osc,sequence);
 
 // Trigger single note
 
-synthy.trigger = function(osc, frequency, length, wait){
+synthy.trigger = function(osc, frequency, length, volume, wait){
     
+if(volume > 1){
+ 
+volume = 1;
     
+}
+
 //Set wait time to 0 if not set
     
 if(!wait){
@@ -183,7 +188,7 @@ var wait = 0;
 synthy.timeouts.push(window.setTimeout(function(){
 synthy.glow(osc,length);
 synthy.pitch(osc,frequency);
-synthy["osc"+osc].speaker.gain.value = 0.05;
+synthy["osc"+osc].speaker.gain.value = volume;
     
 },wait));
     
@@ -200,9 +205,10 @@ var wait = 0;
 for (i=0; i<sequence.length; i+=1){
     
 var pitch = sequence[i][0];
-var length = sequence[i][1]  
+var length = sequence[i][1];
+var volume = sequence[i][2]
 
-synthy.trigger(osc,pitch,length,wait);
+synthy.trigger(osc,pitch,length,volume,wait);
 
 wait += sequence[i][1]
 
@@ -270,17 +276,13 @@ var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).attr("value");
     
 if(pitch && length){
-synthy.seq[osc].push([parseInt(pitch),parseInt(length)]);    
+synthy.seq[osc].push([parseFloat(pitch),parseFloat(length),parseFloat(volume)]);    
 }
 }
    
 }
 
 getdata(1); getdata(2); getdata(3);
-
-console.log(synthy.seq[1]);
-console.log(synthy.seq[2]);
-console.log(synthy.seq[3]);
     
 synthy.sequence(1,synthy.seq[1]);
 synthy.sequence(2,synthy.seq[2]);

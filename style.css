@@ -17,6 +17,7 @@ header {width:100%; padding:5px; background-color:white; margin-bottom:20px; hei
 #phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px;}
 .buildcolumn {float:left; width:200px; margin:10px;}
 #play {clear:both; display:block; width:100px; margin:auto;}
+#stop {clear:both; display:block; width:100px; margin:auto;}
 
 .on {
     box-shadow: 0 0 5px,

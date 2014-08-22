@@ -265,11 +265,33 @@ $(osc).find(".waveform").append("<select><option>Sine</option><option>Saw</optio
 
 //Get details from phrase builder
 
+$(document).ready(function(){
+
+$("#stop").hide();
+
+});
+
 $("#play").on("click",function(){
   
 synthy.startphrase();
     
-})
+$("#play").hide();
+$("#stop").show();
+    
+});
+
+$("#stop").on("click",function(){
+  
+synthy.final = true;
+    
+while (synthy.timeouts.length > 0){
+synthy.stop();
+}
+    
+$("#play").show();
+$("#stop").hide();
+    
+});
     
 synthy.startphrase = function(){
     

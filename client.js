@@ -227,13 +227,16 @@ return "Synthy is playing";
 
 //Make a new row in the phrase builder
 
-$("#newrow").on("click",function(){
+$(".newrow").on("click",function(){
 
-$("#oscillator").append("<select><option value='1' selected='selected'>One</option><option value='2'>Two</option><option value='3'>Three</option></select>");
-$("#pitch").append("<input />");
-$("#length").append("<input />");
-$("#volume").append("<input />");
-$("#waveform").append("<select><option>Sine</option><option>Saw</option><option>Square</option></select>");
+var osc = $(this).parent().attr("id").replace("build", "");
+
+var osc = $("#build"+osc);
+
+$(osc).find(".pitch").append("<input />");
+$(osc).find(".length").append("<input />");
+$(osc).find(".volume").append("<input />");
+$(osc).find(".waveform").append("<select><option>Sine</option><option>Saw</option><option>Square</option></select>");
  
 });
 
@@ -249,25 +252,32 @@ synthy.startphrase = function(){
     
 synthy.final = false;
     
-//Get amount of rows
-
-var rows = $("#pitch input").length;
-
 synthy.seq = {};
 synthy.seq["1"] = [];
 synthy.seq["2"] = [];
 synthy.seq["3"] = [];
+
+var getdata = function(osc){
+ 
+var column = $("#build"+osc);
+    
+var rows = $(column).find(".pitch input").length;
     
 for(i=0; i<rows; i+=1){
- 
-var osc = $($("#oscillator select")[i]).val();
-var pitch = $($("#pitch input")[i]).val();
-var length = $($("#length input")[i]).val();
-var volume = $($("#volume input")[i]).val();
-var waveform = $($("#waveform select")[i]).attr("value");
+
+var pitch = $($(column).find(".pitch input")[i]).val();
+var length = $($(column).find(".length input")[i]).val();
+var volume = $($(column).find(".volume input")[i]).val();
+var waveform = $($(column).find(".waveform select")[i]).attr("value");
+    
+if(pitch && length){
 synthy.seq[osc].push([parseInt(pitch),parseInt(length)]);    
-  
 }
+}
+   
+}
+
+getdata(1); getdata(2); getdata(3);
 
 synthy.sequence(1,synthy.seq[1]);
 synthy.sequence(2,synthy.seq[2]);

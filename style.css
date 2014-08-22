@@ -10,7 +10,7 @@ h1 {font-size-adjust: 0.65; font-weight:bold; font-style:normal; display: inline
 #line2 {background-color:green;}
 #line3 {background-color:blue;}
 header {width:100%; padding:5px;}
-#phrasebuilder {position:absolute; width:255px; padding:10px; background-color:white;}
+#phrasebuilder {position:absolute; padding:10px; background-color:white;}
 #phrasebuilder {text-align: center;}
 #phrasebuilder section {width:50px; float:left; line-height:30px;}
 #phrasebuilder h3 {font-size:85%; text-transform: uppercase; margin:0px; line-height:5px;}
@@ -18,3 +18,5 @@ header {width:100%; padding:5px;}
 #phrasebuilder input {width:40px; margin:0 auto 0 auto;}
 #phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%;}
 #phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px;}
+.buildcolumn {float:left; width:200px; margin:10px;}
+#play {clear:both; display:block; width:100px; margin:auto;}

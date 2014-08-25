@@ -17,7 +17,12 @@ synthy.osc1.speaker = synthy.audioCtx.createGain();
 synthy.osc1.speaker.gain.value = 0.0005;
 synthy.osc1.speaker.connect(synthy.audioCtx.destination);
 
-synthy.osc1.connect(synthy.osc1.speaker);
+//First filter
+
+synthy.osc1.filter = synthy.audioCtx.createBiquadFilter();
+synthy.osc1.connect(synthy.osc1.filter);
+synthy.osc1.filter.connect(synthy.osc1.speaker);
+synthy.osc1.filter.type = 0;
 
         
 //Second oscillator
@@ -30,7 +35,12 @@ synthy.osc2.speaker = synthy.audioCtx.createGain();
 synthy.osc2.speaker.gain.value = 0.0005;
 synthy.osc2.speaker.connect(synthy.audioCtx.destination);
 
-synthy.osc2.connect(synthy.osc2.speaker);
+//Second filter
+
+synthy.osc2.filter = synthy.audioCtx.createBiquadFilter();
+synthy.osc2.connect(synthy.osc2.filter);
+synthy.osc2.filter.connect(synthy.osc2.speaker);
+synthy.osc2.filter.type = 0;
 
 //Third oscillator
         
@@ -42,7 +52,25 @@ synthy.osc3.speaker = synthy.audioCtx.createGain();
 synthy.osc3.speaker.gain.value = 0.0005;
 synthy.osc3.speaker.connect(synthy.audioCtx.destination);
 
-synthy.osc3.connect(synthy.osc3.speaker);
+//Third filter
+
+synthy.osc3.filter = synthy.audioCtx.createBiquadFilter();
+synthy.osc3.connect(synthy.osc3.filter);
+synthy.osc3.filter.connect(synthy.osc3.speaker);
+synthy.osc3.filter.type = 0;
+
+$("#q").on("mouseup",function(){
+    
+synthy.filter.Q.value = $("#q").val()/100;
+    
+});
+
+$("#freq").on("mouseup",function(){
+    
+synthy.filter.frequency.value = $("#freq").val();
+    
+});
+
 
 //Start
         

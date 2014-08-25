@@ -234,13 +234,20 @@ synthy.phraseplayer(3,phrase[2]);
     
 //Repeat when longest is done
     
-synthy.intervals.push(window.setInterval(function(){
- 
+synthy.loop = window.setInterval(function(){
+
+window.clearInterval(synthy.loop); 
+
+synthy.timeouts.forEach(function(element){
+
+window.clearTimeout(element);
+    
+})
+
 synthy.play(phrase);
     
-},longest));
-
-}
+},longest);
+};
     
 synthy.phraseplayer = function(osc,pattern){
     
@@ -314,24 +321,16 @@ $("#stop").on("click",function(){
   
 synthy.final = true;
     
-synthy.intervals.forEach(function(element){
-
-window.clearInterval(element);
+window.clearInterval(synthy.loop);
     
-})
-                         
-synthy.timeouts.forEach(function(element){
-
-window.clearTimeout(element);
-    
-})
-
-synthy.osc1.speaker.gain.value = 0;
-synthy.osc2.speaker.gain.value = 0;
-synthy.osc3.speaker.gain.value = 0;
+synthy.timeouts.forEach(function(element){window.clearTimeout(element)});
 
 $("#play").show();
 $("#stop").hide();
+    
+synthy.osc1.speaker.gain.value = 0;
+synthy.osc2.speaker.gain.value = 0;
+synthy.osc3.speaker.gain.value = 0;
     
 });
     
@@ -356,6 +355,20 @@ var pitch = $($(column).find(".pitch input")[i]).val();
 var length = $($(column).find(".length input")[i]).val();
 var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).val();
+    
+if(isNaN(pitch)){
+//Note
+var note = pitch[0].toUpperCase();
+//Sharp?
+if(pitch.indexOf("#") !== -1){
+note += "#";   
+}
+//Octave
+var octave = pitch[pitch.length-1];
+//Frequency
+pitch = synthy.notes[note].frequencies[octave];
+    
+   }
     
 if(pitch && length){
 

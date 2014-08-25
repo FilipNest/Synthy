@@ -318,8 +318,6 @@ $("#stop").show();
 });
 
 $("#stop").on("click",function(){
-  
-synthy.final = true;
     
 window.clearInterval(synthy.loop);
     
@@ -335,8 +333,6 @@ synthy.osc3.speaker.gain.value = 0;
 });
     
 synthy.startphrase = function(){
-    
-synthy.final = false;
     
 synthy.seq = {};
 synthy.seq["1"] = [];

@@ -195,69 +195,74 @@ synthy.sequence(osc,sequence);
 
 // Trigger single note
 
-synthy.trigger = function(osc, frequency, length, volume, waveform, wait){
+synthy.trigger = function(osc, play){
+    
+var frequency = play.pitch;
+var length = play.time;
+var volume = play.volume;
+var waveform = play.waveform;
+    
+// Cap volume at 1
     
 if(volume > 1){
  
 volume = 1;
     
 }
-
-//Set wait time to 0 if not set
-    
-if(!wait){
-
-var wait = 0;
-    
-}
     
 //Start note
     
-synthy.timeouts.push(window.setTimeout(function(){
 synthy.glow(osc,length);
 synthy.pitch(osc,frequency);
 synthy["osc"+osc].speaker.gain.value = volume;
 synthy["osc"+osc].type = waveform;
     
-},wait));
+if(synthy.final){
+
+synthy["osc"+osc].speaker.gain.value = 0;
+
+}
     
 };
 
-//Sequence
+synthy.play = function(phrase){
 
-synthy.sequence = function(osc,sequence){
-    
-//Set initial wait time
-    
-var wait = 0;
-    
-for (i=0; i<sequence.length; i+=1){
-    
-var pitch = sequence[i][0];
-var length = sequence[i][1];
-var volume = sequence[i][2];
-var waveform = sequence[i][3];
+if(phrase[0].length !== 0){
+synthy.phraseplayer(1,phrase[0]);
+}
+if(phrase[1].length !== 0){
+synthy.phraseplayer(2,phrase[1]);
+}
+if(phrase[2].length !== 0){
+synthy.phraseplayer(3,phrase[2]);
+}
 
-synthy.trigger(osc,pitch,length,volume,waveform,wait);
-
-wait += sequence[i][1]
-
-if(i === (sequence.length -1)){
- 
-synthy.timeouts.push(window.setTimeout(function(){
+}
     
-synthy["osc"+osc].speaker.gain.value = 0;
+synthy.phraseplayer = function(osc,pattern){
     
-synthy.restart(osc,sequence);
+var time = 0;
+    
+pattern.forEach(function(element,index){
+
+window.setTimeout(function(){
    
-},wait));
+synthy.trigger(osc, element);
+    
+},time);
+
+time += element.time;
+    
+});
+
+if(!synthy.final){
+window.setTimeout(function(){
+    
+synthy.phraseplayer(osc,pattern);
+    
+},time);
     
 }
-
-}
-
-return "Synthy is playing";
-
 };
 
 //Make a new row in the phrase builder
@@ -337,7 +342,7 @@ var getdata = function(osc){
 var column = $("#build"+osc);
     
 var rows = $(column).find(".pitch input").length;
-    
+
 for(i=0; i<rows; i+=1){
 
 var pitch = $($(column).find(".pitch input")[i]).val();
@@ -346,17 +351,20 @@ var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).val();
     
 if(pitch && length){
-synthy.seq[osc].push([parseFloat(pitch),parseFloat(length),parseFloat(volume),waveform]);    
+
+synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:waveform});
 }
 }
    
 }
 
+//Get data from form
+
 getdata(1); getdata(2); getdata(3);
     
-synthy.sequence(1,synthy.seq[1]);
-synthy.sequence(2,synthy.seq[2]);
-synthy.sequence(3,synthy.seq[3]);
+//Send sequence to synthy
+    
+synthy.play([synthy.seq["1"],synthy.seq["2"],synthy.seq["3"]]);
 
 };
 

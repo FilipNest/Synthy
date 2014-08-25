@@ -269,16 +269,28 @@ time += element.time;
 
 //Make a new row in the phrase builder
 
-$(".newrow").on("click",function(){
-
-var osc = $(this).parent().attr("id").replace("build", "");
-
+synthy.newrow = function(osc){
+    
 var osc = $("#build"+osc);
 
 $(osc).find(".pitch").append("<input />");
 $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
 $(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option><option value='triangle'>Triangle</option></select>");
+    
+};
+
+//Starting rows
+
+synthy.newrow(1);
+synthy.newrow(2);
+synthy.newrow(3);
+
+$(".newrow").on("click",function(){
+
+var osc = $(this).parent().attr("id").replace("build", "");
+    
+synthy.newrow(osc);
  
 });
 
@@ -298,6 +310,14 @@ $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);;
 $(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option><option value='trigangle'></option></select>").find("select").last().val(waveform);
  
+});
+
+//Delete row
+
+$(".delete button").on("click",function(){
+   
+console.log($(this).parent());
+    
 });
 
 //Get details from phrase builder

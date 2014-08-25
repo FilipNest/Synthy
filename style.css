@@ -14,8 +14,12 @@ header {width:100%; padding:5px; background-color:white; margin-bottom:20px; hei
 #phrasebuilder label {font-size:40%; font-family:arial;}
 #phrasebuilder input {width:40px; margin:0 auto 0 auto;}
 #phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%;}
+#phrasebuilder .delete {float:right;}
+#phrasebuilder .delete button {border-style:none; float:right; width:48px;}
 #phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px;}
-.buildcolumn {float:left; width:200px; margin:10px;}
+.clear {clear:both;}
+
+.buildcolumn {float:left; width:260px; margin:10px;}
 #play {clear:both; display:block; width:100px; margin:auto;}
 #stop {clear:both; display:block; width:100px; margin:auto;}
 

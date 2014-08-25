@@ -330,6 +330,15 @@ synthy.osc1.speaker.gain.value = 0;
 synthy.osc2.speaker.gain.value = 0;
 synthy.osc3.speaker.gain.value = 0;
     
+document.getElementById('osc1').style.background = null;
+document.getElementById('osc1').style.color = null;
+    
+document.getElementById('osc2').style.background = null;
+document.getElementById('osc2').style.color = null;
+    
+document.getElementById('osc3').style.background = null;
+document.getElementById('osc3').style.color = null;
+    
 });
     
 synthy.startphrase = function(){

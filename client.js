@@ -159,39 +159,8 @@ document.getElementById('osc'+osc).style.color = synthy.notes[note.note].colour;
     
 }
 
-//Timeouts
-
 synthy.timeouts = [];
-
-//On sequence end
-
-synthy.stop = function(){
-  
-//Delete trailing timeouts
-    
-synthy.timeouts.forEach(function(element,index){
-    
-window.clearTimeout(synthy.timeouts[index]);
-synthy.timeouts = [];
-    
-});
-    
-//Mute
-    
-synthy.osc1.speaker.gain.value = 0;
-synthy.osc2.speaker.gain.value = 0;
-synthy.osc3.speaker.gain.value = 0;
-    
-};
-
-synthy.restart = function(osc,sequence){
-    
-//If not final, restart
-    
-if(!synthy.final){
-synthy.sequence(osc,sequence);
-}    
-};
+synthy.intervals = [];
 
 // Trigger single note
 
@@ -217,16 +186,42 @@ synthy.pitch(osc,frequency);
 synthy["osc"+osc].speaker.gain.value = volume;
 synthy["osc"+osc].type = waveform;
     
-if(synthy.final){
-
-synthy["osc"+osc].speaker.gain.value = 0;
-
-}
-    
 };
 
 synthy.play = function(phrase){
+    
+//Calculate phrase length
 
+var phraselength = function(phrase){
+
+var length = 0;
+    
+if(phrase.length !== 0){
+ 
+phrase.forEach(function(element){
+ 
+length += element.time;
+    
+})      
+    
+}
+
+return length;
+    
+}
+
+var longest = 0;
+    
+phrase.forEach(function(element){
+ 
+if(phraselength(element) > longest){
+    
+longest = phraselength(element);
+    
+}
+    
+});
+               
 if(phrase[0].length !== 0){
 synthy.phraseplayer(1,phrase[0]);
 }
@@ -236,6 +231,14 @@ synthy.phraseplayer(2,phrase[1]);
 if(phrase[2].length !== 0){
 synthy.phraseplayer(3,phrase[2]);
 }
+    
+//Repeat when longest is done
+    
+synthy.intervals.push(window.setInterval(function(){
+ 
+synthy.play(phrase);
+    
+},longest));
 
 }
     
@@ -245,24 +248,16 @@ var time = 0;
     
 pattern.forEach(function(element,index){
 
-window.setTimeout(function(){
+synthy.timeouts.push(window.setTimeout(function(){
    
 synthy.trigger(osc, element);
     
-},time);
+},time));
 
 time += element.time;
     
 });
-
-if(!synthy.final){
-window.setTimeout(function(){
     
-synthy.phraseplayer(osc,pattern);
-    
-},time);
-    
-}
 };
 
 //Make a new row in the phrase builder
@@ -319,10 +314,22 @@ $("#stop").on("click",function(){
   
 synthy.final = true;
     
-while (synthy.timeouts.length > 0){
-synthy.stop();
-}
+synthy.intervals.forEach(function(element){
+
+window.clearInterval(element);
     
+})
+                         
+synthy.timeouts.forEach(function(element){
+
+window.clearTimeout(element);
+    
+})
+
+synthy.osc1.speaker.gain.value = 0;
+synthy.osc2.speaker.gain.value = 0;
+synthy.osc3.speaker.gain.value = 0;
+
 $("#play").show();
 $("#stop").hide();
     

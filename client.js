@@ -271,7 +271,7 @@ var osc = $("#build"+osc);
 $(osc).find(".pitch").append("<input />");
 $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
-$(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option></select>");
+$(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option><option value='triangle'>Triangle</option></select>");
  
 });
 
@@ -289,7 +289,7 @@ var waveform = $(osc).find(".waveform").children().last().val();
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);;
-$(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option></select>").find("select").last().val(waveform);
+$(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option><option value='trigangle'></option></select>").find("select").last().val(waveform);
  
 });
 

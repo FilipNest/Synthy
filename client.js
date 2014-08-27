@@ -270,6 +270,10 @@ synthy.currentphrase();
 
 synthy.clear = function(){
 
+window.clearInterval(synthy.loop);
+    
+synthy.timeouts.forEach(function(element){window.clearTimeout(element)});
+    
 synthy.osc1.speaker.gain.value = 0;
 synthy.osc2.speaker.gain.value = 0;
 synthy.osc3.speaker.gain.value = 0;
@@ -366,26 +370,13 @@ synthy.startphrase();
 
 $("#stop").on("click",function(){
     
-window.clearInterval(synthy.loop);
-    
-synthy.timeouts.forEach(function(element){window.clearTimeout(element)});
-    
-synthy.osc1.speaker.gain.value = 0;
-synthy.osc2.speaker.gain.value = 0;
-synthy.osc3.speaker.gain.value = 0;
-    
-document.getElementById('osc1').style.background = null;
-document.getElementById('osc1').style.color = null;
-    
-document.getElementById('osc2').style.background = null;
-document.getElementById('osc2').style.color = null;
-    
-document.getElementById('osc3').style.background = null;
-document.getElementById('osc3').style.color = null;
+synthy.clear();
     
 });
     
 synthy.startphrase = function(){
+    
+synthy.clear();
     
 synthy.seq = {};
 synthy.seq["1"] = [];
@@ -449,3 +440,11 @@ window.setTimeout(function(){
 $(osc).removeClass("on").addClass("off");
 },ms/2)
 }
+
+//Change pattern on form change
+
+$("form").change(function(){
+if(synthy.currentphrase){
+synthy.startphrase();
+}
+});

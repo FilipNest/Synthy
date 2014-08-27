@@ -221,6 +221,8 @@ longest = phraselength(element);
 }
     
 });
+    
+synthy.currentphrase = function(){
                
 if(phrase[0].length !== 0){
 synthy.phraseplayer(1,phrase[0]);
@@ -244,9 +246,43 @@ window.clearTimeout(element);
     
 })
 
-synthy.play(phrase);
+synthy.clear();
+synthy.end();
     
 },longest);
+    
+};
+    
+synthy.currentphrase();
+    
+};
+
+synthy.end = function(){
+    
+if(document.getElementById('repeat').checked){
+    
+synthy.currentphrase();
+    
+}
+    
+    
+};
+
+synthy.clear = function(){
+
+synthy.osc1.speaker.gain.value = 0;
+synthy.osc2.speaker.gain.value = 0;
+synthy.osc3.speaker.gain.value = 0;
+    
+document.getElementById('osc1').style.background = null;
+document.getElementById('osc1').style.color = null;
+    
+document.getElementById('osc2').style.background = null;
+document.getElementById('osc2').style.color = null;
+    
+document.getElementById('osc3').style.background = null;
+document.getElementById('osc3').style.color = null;
+    
 };
     
 synthy.phraseplayer = function(osc,pattern){

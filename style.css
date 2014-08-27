@@ -20,7 +20,7 @@ header {width:100%; padding:5px; background-color:white; margin-bottom:20px; hei
 .repeatlabel, #repeat {position:relative; top:10px;}
 .clear {clear:both;}
 .controls {clear:both; width:300px; margin:auto;}
-.buildcolumn {float:left; width:260px; margin:10px;}
+.buildcolumn {float:left; width:200px; margin:20px;}
 #play {float:left; display:block; width:100px; margin:auto;}
 #stop {float:left; display:block; width:100px; margin:auto;}
 
@@ -37,3 +37,8 @@ header {width:100%; padding:5px; background-color:white; margin-bottom:20px; hei
                0 0 15px,
                0 0 20px
   }
+
+
+@media (max-width: 800px) {
+  #phrasebuilder {width:300px;}
+}

@@ -17,11 +17,12 @@ header {width:100%; padding:5px; background-color:white; margin-bottom:20px; hei
 #phrasebuilder .delete {float:right;}
 #phrasebuilder .delete button {border-style:none; float:right; width:48px;}
 #phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px;}
+.repeatlabel, #repeat {position:relative; top:10px;}
 .clear {clear:both;}
-
+.controls {clear:both; width:300px; margin:auto;}
 .buildcolumn {float:left; width:260px; margin:10px;}
-#play {clear:both; display:block; width:100px; margin:auto;}
-#stop {clear:both; display:block; width:100px; margin:auto;}
+#play {float:left; display:block; width:100px; margin:auto;}
+#stop {float:left; display:block; width:100px; margin:auto;}
 
 .on {
     box-shadow: 0 0 5px,

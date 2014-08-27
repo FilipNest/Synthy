@@ -358,18 +358,9 @@ console.log($(this).parent());
 
 //Get details from phrase builder
 
-$(document).ready(function(){
-
-$("#stop").hide();
-
-});
-
 $("#play").on("click",function(){
   
 synthy.startphrase();
-    
-$("#play").hide();
-$("#stop").show();
     
 });
 
@@ -378,9 +369,6 @@ $("#stop").on("click",function(){
 window.clearInterval(synthy.loop);
     
 synthy.timeouts.forEach(function(element){window.clearTimeout(element)});
-
-$("#play").show();
-$("#stop").hide();
     
 synthy.osc1.speaker.gain.value = 0;
 synthy.osc2.speaker.gain.value = 0;

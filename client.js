@@ -10,7 +10,7 @@ synthy.top = 7902;
 //First oscillator
         
 synthy.osc1 = synthy.audioCtx.createOscillator();
-synthy.osc1.type = 'sine';
+synthy.osc1.type = 0;
 synthy.osc1.frequency.value = 0; // value in hertz
 
 synthy.osc1.speaker = synthy.audioCtx.createGain();
@@ -28,7 +28,7 @@ synthy.osc1.filter.type = 0;
 //Second oscillator
         
 synthy.osc2 = synthy.audioCtx.createOscillator();
-synthy.osc2.type = 'sine';
+synthy.osc2.type = 0;
 synthy.osc2.frequency.value = 0; // value in hertz
 
 synthy.osc2.speaker = synthy.audioCtx.createGain();
@@ -45,7 +45,7 @@ synthy.osc2.filter.type = 0;
 //Third oscillator
         
 synthy.osc3 = synthy.audioCtx.createOscillator();
-synthy.osc3.type = 'sine';
+synthy.osc3.type = 0;
 synthy.osc3.frequency.value = 0; // value in hertz
 
 synthy.osc3.speaker = synthy.audioCtx.createGain();
@@ -193,7 +193,7 @@ synthy.play = function(phrase){
 //Calculate phrase length
 
 var phraselength = function(phrase){
-
+    
 var length = 0;
     
 if(phrase.length !== 0){
@@ -316,7 +316,7 @@ var osc = $("#build"+osc);
 $(osc).find(".pitch").append("<input />");
 $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
-$(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option><option value='triangle'>Triangle</option></select>");
+$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>");
     
 };
 
@@ -348,7 +348,7 @@ var waveform = $(osc).find(".waveform").children().last().val();
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);;
-$(osc).find(".waveform").append("<select><option value='sine'>Sine</option><option value='sawtooth'>Saw</option><option value='square'>Square</option><option value='trigangle'></option></select>").find("select").last().val(waveform);
+$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'></option></select>").find("select").last().val(waveform);
  
 });
 
@@ -371,7 +371,7 @@ synthy.startphrase();
 $("#stop").on("click",function(){
     
 synthy.clear();
-    
+synthy.currentphrase = null;    
 });
     
 synthy.startphrase = function(){
@@ -412,7 +412,7 @@ pitch = synthy.notes[note].frequencies[octave];
     
 if(pitch && length){
 
-synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:waveform});
+synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform)});
 }
 }
    
@@ -425,7 +425,133 @@ getdata(1); getdata(2); getdata(3);
 //Send sequence to synthy
     
 synthy.play([synthy.seq["1"],synthy.seq["2"],synthy.seq["3"]]);
+    
+//Create bundle
+    
+var bundle = "title=synthy";
+    
+for (sequence in synthy.seq){
+    
+//Add oscillator spacer 
+    
+bundle+= "&osc"+sequence+"=";
 
+//Loop over notes for each oscillator 
+
+synthy.seq[sequence].forEach(function(element,index){
+    
+var note = [element.waveform+1,element.pitch,element.time,element.volume*100];
+    
+var pack = synthy.compression.compress(note);
+
+//Add note
+    
+bundle += pack;
+
+//Add note spacer
+
+if(index !== synthy.seq[sequence].length-1){
+bundle += "-"
+}
+});
+
+}   
+    
+//Clear output
+    
+$("#share").attr("href"," ")
+
+//Set output
+
+$("#share").attr("href",window.location.href+"?"+bundle).text("Share this phrase");
+    
+};
+
+synthy.unpack = function(bundle){
+    
+//Extract oscillators from url paramaters
+    
+var first = bundle.substring(bundle.indexOf("&osc1=")+6,bundle.indexOf("&osc2="));
+    
+var second = bundle.substring(bundle.indexOf("&osc2=")+6,bundle.indexOf("&osc3="));
+    
+var third = bundle.substring(bundle.indexOf("&osc3=")+6,bundle.length);
+
+//Turn into arrays of notes
+    
+first = first.split("-");
+second = second.split("-");
+third = third.split("-");
+
+var decode = function(array){
+
+array.forEach(function(element,index){
+
+array[index] = synthy.compression.decompress(element);
+    
+});
+    
+};
+    
+decode(first);
+decode(second);
+decode(third);
+    
+sequences = [];
+    
+sequences.push(first);
+sequences.push(second);
+sequences.push(third); 
+               
+//Dummy sequences if missing
+
+if(!sequences[0]){
+ 
+sequences[0] = [{pitch: "0", time: "0", volume: 0, waveform: 0}]
+    
+}
+    
+if(!sequences[1]){
+ 
+sequences[1] = [{pitch: "0", time: "0", volume: 0, waveform: 0}]
+    
+}
+    
+if(!sequences[2]){
+ 
+sequences[2] = [{pitch: "0", time: "0", volume: 0, waveform: 0}]
+    
+}
+
+//Add sequences to phrasebuilder
+    
+var populate = function(osc){
+     
+sequences[osc-1].forEach(function(element,index){
+ 
+
+
+//First item
+if(index !== 0){
+    
+synthy.newrow(osc);
+
+}
+var column = osc;
+    
+$("#build"+column).find(".pitch").find("input").last().val(element.pitch);
+$("#build"+column).find(".volume").find("input").last().val(element.volume);
+$("#build"+column).find(".waveform").find("select").last().val(element.waveform);
+$("#build"+column).find(".length").find("input").last().val(element.time);
+
+});
+
+};
+    
+populate(1);
+populate(2);
+populate(3);
+   
 };
 
 //Glow synthy, glow
@@ -448,3 +574,15 @@ if(synthy.currentphrase){
 synthy.startphrase();
 }
 });
+
+$(document).ready(function(){
+  
+if(window.location.search){
+
+var bundle = window.location.search.substr(1,window.location.search.length);
+    
+synthy.unpack(bundle);
+    
+}
+    
+})

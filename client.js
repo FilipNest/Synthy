@@ -482,10 +482,6 @@ var third = bundle.substring(bundle.indexOf("&osc3=")+6,bundle.length);
 first = first.split("_");
 second = second.split("_");
 third = third.split("_");
-
-console.log(first);
-console.log(second);
-console.log(third);
     
 var decode = function(array){
 
@@ -583,9 +579,9 @@ $(document).ready(function(){
   
 if(window.location.search){
 
-var bundle = window.location.search.substr(1,window.location.search.length);
+var loaded = window.location.search.substr(1,window.location.search.length);
     
-synthy.unpack(bundle);
+synthy.unpack(loaded);
     
 }
     

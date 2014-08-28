@@ -451,7 +451,7 @@ bundle += pack;
 //Add note spacer
 
 if(index !== synthy.seq[sequence].length-1){
-bundle += "-"
+bundle += "_"
 }
 });
 
@@ -479,10 +479,14 @@ var third = bundle.substring(bundle.indexOf("&osc3=")+6,bundle.length);
 
 //Turn into arrays of notes
     
-first = first.split("-");
-second = second.split("-");
-third = third.split("-");
+first = first.split("_");
+second = second.split("_");
+third = third.split("_");
 
+console.log(first);
+console.log(second);
+console.log(third);
+    
 var decode = function(array){
 
 array.forEach(function(element,index){

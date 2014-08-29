@@ -401,13 +401,12 @@ if(isNaN(pitch)){
 var note = pitch[0].toUpperCase();
 //Sharp?
 if(pitch.indexOf("#") !== -1){
-note += "#";   
+note += "#";
 }
 //Octave
 var octave = pitch[pitch.length-1];
 //Frequency
-pitch = synthy.notes[note].frequencies[octave];
-    
+pitch = synthy.notes[note].frequencies[octave];    
    }
     
 if(pitch && length){
@@ -456,16 +455,25 @@ bundle += "_"
 });
 
 }   
+
+synthy.bundle = bundle;
     
 //Clear output
     
-$("#share").attr("href"," ")
+$("#share").attr("href"," ");
+$("#push").attr("href"," ");
 
 //Set output
 
 $("#share").attr("href",window.location.href+"?"+bundle).text("Share this phrase");
-    
+$("#push").text("PUSH to SYNTHY");    
 };
+
+$("#push").click(function(){
+
+synthy.socket.emit("bundle",synthy.bundle);
+    
+});
 
 synthy.unpack = function(bundle){
     
@@ -576,7 +584,7 @@ synthy.startphrase();
 });
 
 $(document).ready(function(){
-  
+    
 if(window.location.search){
 
 var loaded = window.location.search.substr(1,window.location.search.length);
@@ -585,4 +593,20 @@ synthy.unpack(loaded);
     
 }
     
+//Connect to server
+
+var server = "http://"+window.location.host
+.substring(0, window.location.href.length - 1)+":1337";
+                                            
+synthy.socket = io(server);
+
 })
+
+//Reset synthy
+
+synthy.reset = function(){
+
+$(".buildcolumn input").remove();
+$(".buildcolumn select").remove();
+    
+};

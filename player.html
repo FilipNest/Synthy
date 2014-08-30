@@ -20,98 +20,6 @@
 <div class="osc off" id="osc2"></div>
 <div class="osc off" id="osc3"></div>
     
-<!-- Phrase Builder -->
-    
-<form id="phrasebuilder">
-    
-<div id="build1" class="buildcolumn">
-
-<section class="pitch">
-<h3>Pitch</h3>
-<label>A#3/233</label>
-</section>
-
-<section class="length">
-<h3>Length</h3>
-<label>ms</label>
-</section>
-
-<section class="volume">
-<h3>Volume</h3>
-<label>0-1</label>
-</section>
-
-<section class="waveform">
-<h3>Waveform</h3>
-<label>-</label>
-</section>
-<div class="clear"></div>
-<button type="button" class="newrow">New row</button>
-<button type="button" class="clonerow">Clone row</button>
-</div>
-    
-<div id="build2" class="buildcolumn">
-
-<section class="pitch">
-<h3>Pitch</h3>
-<label>A#3/233</label>
-</section>
-
-<section class="length">
-<h3>Length</h3>
-<label>ms</label>
-</section>
-
-<section class="volume">
-<h3>Volume</h3>
-<label>0-1</label>
-</section>
-
-<section class="waveform">
-<h3>Waveform</h3>
-<label>-</label>
-</section>
-<div class="clear"></div>
-<button type="button" class="newrow">New row</button>
-<button type="button" class="clonerow">Clone row</button>
- 
-</div>
-
-
-<div id="build3" class="buildcolumn">
-
-<section class="pitch">
-<h3>Pitch</h3>
-<label>A#3/233</label>
-</section>
-
-<section class="length">
-<h3>Length</h3>
-<label>ms</label>
-</section>
-
-<section class="volume">
-<h3>Volume</h3>
-<label>0-1</label>
-</section>
-
-<section class="waveform">
-<h3>Waveform</h3>
-<label>-</label>
-</section>
-<div class="clear"></div>
-<button type="button" class="newrow">New row</button>
-<button type="button" class="clonerow">Clone row</button>
-
-</div>
-    <div class="controls">
-<button type="button" id="play">Play</button>
-<button type="button" id="stop">Stop</button>
-<span class="repeatlabel">Repeat</span><input id="repeat" type="checkbox" checked>
-<a href="" id="share"></a><button type="button" id="push"></button>
-    </div>
-</form>
-
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="client.js"></script>
@@ -126,10 +34,13 @@
 
 <script>
 $(document).ready(function(){
+synthy.player = true;
 synthy.socket.on('synth', function (data) {
-    console.log(data);
-    
-    synthy.unpack(data);
+if(data){
+   synthy.output = synthy.unpack(data);
+    synthy.clear();
+    synthy.play(synthy.output);
+}
   });
 })
 </script>

@@ -13,9 +13,9 @@ function handler (req, res) {
   };
 
 io.on('connection', function (socket) {
-socket.emit('synth',previous);
+io.sockets.emit('synth', previous);
   socket.on('bundle', function (data) {
     previous = data;
-    socket.emit('synth',data);
+    io.sockets.emit('synth', previous);
   });
 });

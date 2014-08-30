@@ -200,7 +200,7 @@ if(phrase.length !== 0){
  
 phrase.forEach(function(element){
  
-length += element.time;
+length += parseInt(element.time);
     
 })      
     
@@ -221,7 +221,7 @@ longest = phraselength(element);
 }
     
 });
-    
+
 synthy.currentphrase = function(){
                
 if(phrase[0].length !== 0){
@@ -258,8 +258,7 @@ synthy.currentphrase();
 };
 
 synthy.end = function(){
-    
-if(document.getElementById('repeat').checked){
+if(synthy.player || document.getElementById('repeat').checked){
     
 synthy.currentphrase();
     
@@ -478,7 +477,7 @@ synthy.socket.emit("bundle",synthy.bundle);
 synthy.unpack = function(bundle){
     
 //Extract oscillators from url paramaters
-    
+
 var first = bundle.substring(bundle.indexOf("&osc1=")+6,bundle.indexOf("&osc2="));
     
 var second = bundle.substring(bundle.indexOf("&osc2=")+6,bundle.indexOf("&osc3="));
@@ -530,10 +529,14 @@ if(!sequences[2]){
 sequences[2] = [{pitch: "0", time: "0", volume: 0, waveform: 0}]
     
 }
+    
+return sequences;
+    
+}
 
 //Add sequences to phrasebuilder
     
-var populate = function(osc){
+synthy.populate = function(osc,sequences){
      
 sequences[osc-1].forEach(function(element,index){
  
@@ -554,12 +557,6 @@ $("#build"+column).find(".length").find("input").last().val(element.time);
 
 });
 
-};
-    
-populate(1);
-populate(2);
-populate(3);
-   
 };
 
 //Glow synthy, glow
@@ -589,7 +586,10 @@ if(window.location.search){
 
 var loaded = window.location.search.substr(1,window.location.search.length);
     
-synthy.unpack(loaded);
+var unpacked = synthy.unpack(loaded);
+synthy.populate(1,unpacked);
+synthy.populate(2,unpacked);
+synthy.populate(3,unpacked);
     
 }
     

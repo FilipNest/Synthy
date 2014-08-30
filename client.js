@@ -7,70 +7,41 @@ synthy.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
 synthy.top = 7902;
 
+//Define oscillator types
+synthy.types = [];
+synthy.types[0] = "sine";
+synthy.types[1] = "sawtooth";
+synthy.types[2] = "square";
+synthy.types[3] = "triangle";
+
+
 //First oscillator
         
 synthy.osc1 = synthy.audioCtx.createOscillator();
-synthy.osc1.type = 0;
 synthy.osc1.frequency.value = 0; // value in hertz
-
 synthy.osc1.speaker = synthy.audioCtx.createGain();
 synthy.osc1.speaker.gain.value = 0.0005;
+synthy.osc1.connect(synthy.osc1.speaker);
 synthy.osc1.speaker.connect(synthy.audioCtx.destination);
-
-//First filter
-
-synthy.osc1.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc1.connect(synthy.osc1.filter);
-synthy.osc1.filter.connect(synthy.osc1.speaker);
-synthy.osc1.filter.type = 0;
 
         
 //Second oscillator
         
 synthy.osc2 = synthy.audioCtx.createOscillator();
-synthy.osc2.type = 0;
 synthy.osc2.frequency.value = 0; // value in hertz
-
 synthy.osc2.speaker = synthy.audioCtx.createGain();
 synthy.osc2.speaker.gain.value = 0.0005;
+synthy.osc2.connect(synthy.osc2.speaker);
 synthy.osc2.speaker.connect(synthy.audioCtx.destination);
-
-//Second filter
-
-synthy.osc2.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc2.connect(synthy.osc2.filter);
-synthy.osc2.filter.connect(synthy.osc2.speaker);
-synthy.osc2.filter.type = 0;
 
 //Third oscillator
         
 synthy.osc3 = synthy.audioCtx.createOscillator();
-synthy.osc3.type = 0;
 synthy.osc3.frequency.value = 0; // value in hertz
-
 synthy.osc3.speaker = synthy.audioCtx.createGain();
 synthy.osc3.speaker.gain.value = 0.0005;
+synthy.osc3.connect(synthy.osc3.speaker);
 synthy.osc3.speaker.connect(synthy.audioCtx.destination);
-
-//Third filter
-
-synthy.osc3.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc3.connect(synthy.osc3.filter);
-synthy.osc3.filter.connect(synthy.osc3.speaker);
-synthy.osc3.filter.type = 0;
-
-$("#q").on("mouseup",function(){
-    
-synthy.filter.Q.value = $("#q").val()/100;
-    
-});
-
-$("#freq").on("mouseup",function(){
-    
-synthy.filter.frequency.value = $("#freq").val();
-    
-});
-
 
 //Start
         
@@ -165,11 +136,11 @@ synthy.intervals = [];
 // Trigger single note
 
 synthy.trigger = function(osc, play){
-    
+
 var frequency = play.pitch;
 var length = play.time;
 var volume = play.volume;
-var waveform = play.waveform;
+var waveform = synthy.types[play.waveform];
     
 // Cap volume at 1
     
@@ -185,7 +156,6 @@ synthy.glow(osc,length);
 synthy.pitch(osc,frequency);
 synthy["osc"+osc].speaker.gain.value = volume;
 synthy["osc"+osc].type = waveform;
-    
 };
 
 synthy.play = function(phrase){

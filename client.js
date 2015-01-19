@@ -21,8 +21,29 @@ synthy.osc1 = synthy.audioCtx.createOscillator();
 synthy.osc1.frequency.value = 0; // value in hertz
 synthy.osc1.speaker = synthy.audioCtx.createGain();
 synthy.osc1.speaker.gain.value = 0.0005;
-synthy.osc1.connect(synthy.osc1.speaker);
+synthy.osc1.filter = synthy.audioCtx.createBiquadFilter();
+synthy.osc1.connect(synthy.osc1.filter);
+synthy.osc1.filter.connect(synthy.osc1.speaker);
 synthy.osc1.speaker.connect(synthy.audioCtx.destination);
+
+
+synthy.osc1.filter.gain = 10;
+var filter = 0;
+synthy.osc1.filter.Q.value = 5;
+
+window.setInterval(function(){
+   
+    if(filter < 10000){
+      
+        filter+=100;
+        synthy.osc1.filter.frequency.value = filter;
+    } else {
+        
+        filter = 0;
+        
+    }
+    
+},20);
 
         
 //Second oscillator
@@ -434,7 +455,7 @@ $("#push").attr("href"," ");
 
 //Set output
 
-$("#share").attr("href",window.location.href+"?"+bundle).text("Share this phrase");
+$("#share").attr("href",window.location.origin+"/synthy?"+bundle).text("Share this phrase");
 $("#push").text("PUSH to SYNTHY");    
 };
 
@@ -568,7 +589,7 @@ synthy.populate(3,unpacked);
 var server = "http://"+window.location.host
 .substring(0, window.location.href.length - 1)+":1337";
                                             
-synthy.socket = io(server);
+//synthy.socket = io(server);
 
 })
 
@@ -580,3 +601,7 @@ $(".buildcolumn input").remove();
 $(".buildcolumn select").remove();
     
 };
+
+if (!window.location.origin) {
+  window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+}

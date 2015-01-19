@@ -307,6 +307,7 @@ $(osc).find(".pitch").append("<input />");
 $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
 $(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>");
+$(osc).find(".cutoff").append("<input />");
     
 };
 
@@ -334,11 +335,13 @@ var pitch = $(osc).find(".pitch").children().last().val();
 var length = $(osc).find(".length").children().last().val();
 var volume = $(osc).find(".volume").children().last().val();
 var waveform = $(osc).find(".waveform").children().last().val();
+var cutoff = $(osc).find(".cutoff").children().last().val();
 
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
-$(osc).find(".volume").append("<input />").find("input").last().val(volume);;
+$(osc).find(".volume").append("<input />").find("input").last().val(volume);
 $(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'></option></select>").find("select").last().val(waveform);
+$(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);
  
 });
 
@@ -385,6 +388,7 @@ var pitch = $($(column).find(".pitch input")[i]).val();
 var length = $($(column).find(".length input")[i]).val();
 var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).val();
+var cutoff = $($(column).find(".cutoff input")[i]).val();
     
 if(isNaN(pitch)){
 //Note

@@ -14,55 +14,60 @@ synthy.types[1] = "sawtooth";
 synthy.types[2] = "square";
 synthy.types[3] = "triangle";
 
+synthy.init = function(osc,frequency,volume,cutoff, waveform){
+    
+if(!frequency){
+ 
+    frequency = 0;
+    
+}
+    
+if(!frequency){
+ 
+    volume = 0;
+    
+}
+    
+if(!frequency){
+ 
+    cutoff = 0;
+    
+}
+    
+if(!waveform){
+ 
+    waveform = 0;
+    
+}
+    
+if(synthy["osc" + osc]){
+    
+synthy["osc" + osc].stop();
 
-//First oscillator
-        
-synthy.osc1 = synthy.audioCtx.createOscillator();
-synthy.osc1.frequency.value = 0; // value in hertz
-synthy.osc1.speaker = synthy.audioCtx.createGain();
-synthy.osc1.speaker.gain.value = 0.0005;
-synthy.osc1.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc1.filter.gain = 1;
-synthy.osc1.filter.Q.value = 1;
-synthy.osc1.filter.frequency.value = synthy.top;
-synthy.osc1.connect(synthy.osc1.filter);
-synthy.osc1.filter.connect(synthy.osc1.speaker);
-synthy.osc1.speaker.connect(synthy.audioCtx.destination);
+}
+ 
+synthy["osc" + osc] = synthy.audioCtx.createOscillator();
+synthy["osc"+osc].type = waveform;
+synthy["osc" + osc].speaker = synthy.audioCtx.createGain();
+synthy["osc" + osc].speaker.gain.value = volume;
+synthy["osc"+osc].frequency.value = frequency;
+synthy["osc" + osc].filter = synthy.audioCtx.createBiquadFilter();
+synthy["osc" + osc].filter.gain = 1;
+synthy["osc" + osc].filter.Q.value = 1;
+synthy["osc" + osc].filter.frequency.value = cutoff;
+synthy["osc" + osc].connect(synthy["osc" + osc].filter);
+synthy["osc" + osc].filter.connect(synthy["osc" + osc].speaker);
+synthy["osc" + osc].speaker.connect(synthy.audioCtx.destination);
+    
+synthy["osc" + osc].start();
+    
+}
 
-        
-//Second oscillator
-        
-synthy.osc2 = synthy.audioCtx.createOscillator();
-synthy.osc2.frequency.value = 0; // value in hertz
-synthy.osc2.speaker = synthy.audioCtx.createGain();
-synthy.osc2.speaker.gain.value = 0.0005;
-synthy.osc2.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc2.filter.gain = 1;
-synthy.osc2.filter.Q.value = 1;
-synthy.osc2.filter.frequency.value = synthy.top;
-synthy.osc2.connect(synthy.osc2.filter);
-synthy.osc2.filter.connect(synthy.osc2.speaker);
-synthy.osc2.speaker.connect(synthy.audioCtx.destination);
+//Initialise oscillators
 
-//Third oscillator
-        
-synthy.osc3 = synthy.audioCtx.createOscillator();
-synthy.osc3.frequency.value = 0; // value in hertz
-synthy.osc3.speaker = synthy.audioCtx.createGain();
-synthy.osc3.speaker.gain.value = 0.0005;
-synthy.osc3.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc3.filter.gain = 1;
-synthy.osc3.filter.Q.value = 1;
-synthy.osc3.filter.frequency.value = synthy.top;
-synthy.osc3.connect(synthy.osc3.filter);
-synthy.osc3.filter.connect(synthy.osc3.speaker);
-synthy.osc3.speaker.connect(synthy.audioCtx.destination);
-
-//Start
-        
-synthy.osc1.start();
-synthy.osc2.start();
-synthy.osc3.start();
+synthy.init(1);
+synthy.init(2);
+synthy.init(3);
         
 //Functions for changing pitch
         
@@ -74,7 +79,7 @@ frequency = top;
     
 }
 
-synthy["osc"+osc].frequency.value = frequency;
+//synthy["osc"+osc].frequency.value = frequency;
 
 synthy["osc"+osc].frequency.note = synthy.note(frequency);
 
@@ -151,28 +156,22 @@ synthy.intervals = [];
 // Trigger single note
 
 synthy.trigger = function(osc, play){
-
-var frequency = play.pitch;
-var length = play.time;
-var volume = play.volume;
-var waveform = synthy.types[play.waveform];
-var cutoff = play.cutoff;
     
 // Cap volume at 1
     
-if(volume > 1){
+if(play.volume > 1){
  
-volume = 1;
+play.volume = 1;
     
 }
     
+synthy.init(osc,play.pitch, play.volume, play.cutoff, play.waveform);
+
 //Start note
     
-synthy.glow(osc,length);
-synthy.pitch(osc,frequency);
-synthy["osc"+osc].filter.frequency.value = cutoff;
-synthy["osc"+osc].speaker.gain.value = volume;
-synthy["osc"+osc].type = waveform;
+synthy.glow(osc,play.time);
+synthy.pitch(osc,play.pitch);
+
 };
 
 synthy.play = function(phrase){

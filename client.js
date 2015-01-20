@@ -306,6 +306,24 @@ $(osc).find(".cutoff").append("<input />");
     
 };
 
+//Start again
+
+synthy.clearall = function(){
+    
+  $(".pitch input").remove();
+$(".length input").remove();
+$(".volume input").remove();
+$(".waveform select").remove();
+$(".cutoff input").remove();
+    
+//Make starting rows
+    
+synthy.newrow(1);
+synthy.newrow(2);
+synthy.newrow(3);
+    
+};
+
 //Starting rows
 
 synthy.newrow(1);
@@ -472,7 +490,7 @@ synthy.socket.emit("bundle",synthy.bundle);
 });
 
 synthy.unpack = function(bundle){
-    
+        
 //Extract oscillators from url paramaters
 
 var first = bundle.substring(bundle.indexOf("&osc1=")+6,bundle.indexOf("&osc2="));
@@ -596,7 +614,7 @@ synthy.populate(3,unpacked);
 var server = "http://"+window.location.host
 .substring(0, window.location.href.length - 1)+":1337";
                                             
-//synthy.socket = io(server);
+synthy.socket = io(server);
 
 })
 

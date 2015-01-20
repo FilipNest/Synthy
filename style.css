@@ -12,8 +12,8 @@ header {width:100%; padding:5px; background-color:white; margin-bottom:20px; hei
 #phrasebuilder section {width:50px; float:left; line-height:30px;}
 #phrasebuilder h3 {font-size:85%; text-transform: uppercase; margin:0px; line-height:5px;}
 #phrasebuilder label {font-size:40%; font-family:arial;}
-#phrasebuilder input {width:40px; margin:0 auto 0 auto;}
-#phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%;}
+#phrasebuilder input {width:40px; margin:0 auto 0 auto; vertical-align: bottom; height:20px;}
+#phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%; vertical-align: bottom; height:26px; margin-left:3px;}
 #phrasebuilder .delete {float:right;}
 #phrasebuilder .delete button {border-style:none; float:right; width:48px;}
 #phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px;}
@@ -43,6 +43,6 @@ a:active {color:inherit;}
   }
 
 
-@media (max-width: 800px) {
+@media (max-width: 950px) {
   #phrasebuilder {width:300px;}
 }

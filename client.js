@@ -22,23 +22,37 @@ synthy.osc1.frequency.value = 0; // value in hertz
 synthy.osc1.speaker = synthy.audioCtx.createGain();
 synthy.osc1.speaker.gain.value = 0.0005;
 synthy.osc1.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc1.filter.gain = 1;
-synthy.osc1.filter.Q.value = 1;
 synthy.osc1.connect(synthy.osc1.filter);
 synthy.osc1.filter.connect(synthy.osc1.speaker);
 synthy.osc1.speaker.connect(synthy.audioCtx.destination);
 
+
+synthy.osc1.filter.gain = 10;
+var filter = 0;
+synthy.osc1.filter.Q.value = 5;
+
+window.setInterval(function(){
+   
+    if(filter < 10000){
+      
+        filter+=100;
+        synthy.osc1.filter.frequency.value = filter;
+    } else {
+        
+        filter = 0;
+        
+    }
+    
+},20);
+
+        
 //Second oscillator
         
 synthy.osc2 = synthy.audioCtx.createOscillator();
 synthy.osc2.frequency.value = 0; // value in hertz
 synthy.osc2.speaker = synthy.audioCtx.createGain();
 synthy.osc2.speaker.gain.value = 0.0005;
-synthy.osc2.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc2.filter.gain = 1;
-synthy.osc2.filter.Q.value = 1;
-synthy.osc2.connect(synthy.osc2.filter);
-synthy.osc2.filter.connect(synthy.osc2.speaker);
+synthy.osc2.connect(synthy.osc2.speaker);
 synthy.osc2.speaker.connect(synthy.audioCtx.destination);
 
 //Third oscillator
@@ -47,11 +61,7 @@ synthy.osc3 = synthy.audioCtx.createOscillator();
 synthy.osc3.frequency.value = 0; // value in hertz
 synthy.osc3.speaker = synthy.audioCtx.createGain();
 synthy.osc3.speaker.gain.value = 0.0005;
-synthy.osc3.filter = synthy.audioCtx.createBiquadFilter();
-synthy.osc3.filter.gain = 1;
-synthy.osc3.filter.Q.value = 1;
-synthy.osc3.connect(synthy.osc3.filter);
-synthy.osc3.filter.connect(synthy.osc3.speaker);
+synthy.osc3.connect(synthy.osc3.speaker);
 synthy.osc3.speaker.connect(synthy.audioCtx.destination);
 
 //Start
@@ -296,7 +306,9 @@ var osc = $("#build"+osc);
 $(osc).find(".pitch").append("<input />");
 $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
-$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>");    
+$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>");
+$(osc).find(".cutoff").append("<input />");
+    
 };
 
 //Starting rows
@@ -323,11 +335,13 @@ var pitch = $(osc).find(".pitch").children().last().val();
 var length = $(osc).find(".length").children().last().val();
 var volume = $(osc).find(".volume").children().last().val();
 var waveform = $(osc).find(".waveform").children().last().val();
+var cutoff = $(osc).find(".cutoff").children().last().val();
 
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);
 $(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'></option></select>").find("select").last().val(waveform);
+$(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);
  
 });
 
@@ -374,6 +388,7 @@ var pitch = $($(column).find(".pitch input")[i]).val();
 var length = $($(column).find(".length input")[i]).val();
 var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).val();
+var cutoff = $($(column).find(".cutoff input")[i]).val();
     
 if(isNaN(pitch)){
 //Note

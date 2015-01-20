@@ -156,6 +156,7 @@ var frequency = play.pitch;
 var length = play.time;
 var volume = play.volume;
 var waveform = synthy.types[play.waveform];
+var cutoff = play.cutoff;
     
 // Cap volume at 1
     
@@ -169,6 +170,7 @@ volume = 1;
     
 synthy.glow(osc,length);
 synthy.pitch(osc,frequency);
+synthy["osc"+osc].filter.frequency.value = cutoff;
 synthy["osc"+osc].speaker.gain.value = volume;
 synthy["osc"+osc].type = waveform;
 };
@@ -334,7 +336,7 @@ var cutoff = $(osc).find(".cutoff").children().last().val();
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);
-$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'></option></select>").find("select").last().val(waveform);
+$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>").find("select").last().val(waveform);
 $(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);
  
 });
@@ -383,6 +385,12 @@ var length = $($(column).find(".length input")[i]).val();
 var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).val();
 var cutoff = $($(column).find(".cutoff input")[i]).val();
+ 
+if (!cutoff || isNaN(cutoff)) {
+   
+    cutoff = synthy.top;
+   
+   };
     
 if(isNaN(pitch)){
 //Note
@@ -399,7 +407,7 @@ pitch = synthy.notes[note].frequencies[octave];
     
 if(pitch && length){
 
-synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform)});
+synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff)});
 }
 }
    

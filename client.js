@@ -434,7 +434,8 @@ bundle+= "&osc"+sequence+"=";
 
 synthy.seq[sequence].forEach(function(element,index){
     
-var note = [element.waveform+1,element.pitch,element.time,element.volume*100];
+    
+var note = [element.waveform+1,element.pitch,element.time,element.volume*100,element.cutoff];
     
 var pack = synthy.compression.compress(note);
 
@@ -550,6 +551,7 @@ $("#build"+column).find(".pitch").find("input").last().val(element.pitch);
 $("#build"+column).find(".volume").find("input").last().val(element.volume);
 $("#build"+column).find(".waveform").find("select").last().val(element.waveform);
 $("#build"+column).find(".length").find("input").last().val(element.time);
+$("#build"+column).find(".cutoff").find("input").last().val(element.cutoff);
 
 });
 

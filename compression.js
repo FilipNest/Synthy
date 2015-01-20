@@ -1,6 +1,7 @@
 synthy.compression = {   
     
 fourdigit: function(number) {
+    
     var output = number.toString();
     while (output.length < 4) {
         output = '0' + output;
@@ -75,8 +76,9 @@ var waveform = note.substring(0, 1);
 var pitch = note.substring(1,5);
 var time = note.substring(5,9);
 var volume = note.substring(9,13);
+var cutoff = note.substring(13,17);
 
-return {waveform:waveform-1,pitch:pitch,time:time,volume:volume/100}
+return {waveform:waveform-1,pitch:pitch,time:time,volume:volume/100, cutoff: cutoff}
 
 }
 }

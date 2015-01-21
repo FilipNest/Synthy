@@ -486,6 +486,8 @@ $("#push").text("PUSH to SYNTHY");
 $("#push").click(function(){
 
 synthy.socket.emit("bundle",synthy.bundle);
+
+window.location.href = window.location.href;
     
 });
 

@@ -13,7 +13,7 @@ function handler (req, res) {
   };
 
 io.on('connection', function (socket) {
-io.sockets.emit('synth', previous);
+socket.emit('synth', previous);
   socket.on('bundle', function (data) {
     previous = data;
     io.sockets.emit('synth', previous);

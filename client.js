@@ -47,7 +47,7 @@ synthy["osc" + osc].stop();
 }
  
 synthy["osc" + osc] = synthy.audioCtx.createOscillator();
-synthy["osc"+osc].type = waveform;
+synthy["osc"+osc].type = synthy.types[waveform];
 synthy["osc" + osc].speaker = synthy.audioCtx.createGain();
 synthy["osc" + osc].speaker.gain.value = volume;
 synthy["osc"+osc].frequency.value = frequency;

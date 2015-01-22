@@ -1,15 +1,8 @@
 Synthy
 ======
 
-Colour and sound synthesiser made in JavaScript using the web audio API.
+Social, shareable colour and sound synthesiser made in JavaScript using the web audio API. Server powered by Socket.io and NodeJS.
 
-[Try it here](http://filipnest.com/synthy/ "Synthy").
+[Synthy](http://filipnest.com/synthy/ "Synthy").
+[Synthy Live Listener](http://filipnest.com/synthy/player "Synthy Player").
 
-User guide
-----------
-
-Use the phrase builder or the developer console to push a message like:
-
-```Javascript
-synthy.sequence(oscillatornumber,[frequency,length,volume,waveform],...);
-```

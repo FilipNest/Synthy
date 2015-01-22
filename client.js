@@ -14,7 +14,7 @@ synthy.types[1] = "sawtooth";
 synthy.types[2] = "square";
 synthy.types[3] = "triangle";
 
-synthy.init = function(tie, osc, frequency,volume,cutoff, waveform){
+synthy.init = function(osc, frequency,volume,cutoff, waveform, tie){
     
 if(!frequency){
  
@@ -40,7 +40,7 @@ if(!waveform){
     
 }
     
-if(typeof tie !== "boolean" || !tie){
+if(tie === false || !synthy["osc" + osc]){
 
     if(synthy["osc" + osc]){
       synthy["osc" + osc].stop();  
@@ -169,7 +169,7 @@ play.volume = 1;
     
 }
     
-synthy.init(osc,play.pitch, play.volume, play.cutoff, play.waveform);
+synthy.init(osc,play.pitch, play.volume, play.cutoff, play.waveform, play.tie);
 
 //Start note
     
@@ -361,10 +361,7 @@ $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);
 $(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>").find("select").last().val(waveform);
-$(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);
-    
-console.log(tie);
-    
+$(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);    
 $(osc).find(".tie").append("<input type='checkbox' />").find("input").last().prop("checked",tie);
  
 });
@@ -413,7 +410,9 @@ var length = $($(column).find(".length input")[i]).val();
 var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).val();
 var cutoff = $($(column).find(".cutoff input")[i]).val();
- 
+var tie = $($(column).find(".tie input")[i]).prop("checked");
+
+    
 if (!cutoff || isNaN(cutoff)) {
    
     cutoff = synthy.top;
@@ -435,7 +434,7 @@ pitch = synthy.notes[note].frequencies[octave];
     
 if(pitch && length){
 
-synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff)});
+synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff), tie:tie});
 }
 }
    
@@ -464,7 +463,7 @@ bundle+= "&osc"+sequence+"=";
 synthy.seq[sequence].forEach(function(element,index){
     
     
-var note = [element.waveform+1,element.pitch,element.time,element.volume*100,element.cutoff];
+var note = [element.tie,element.waveform+1,element.pitch,element.time,element.volume*100,element.cutoff];
     
 var pack = synthy.compression.compress(note);
 

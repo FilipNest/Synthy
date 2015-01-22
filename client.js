@@ -40,27 +40,31 @@ if(!waveform){
     
 }
     
-if(synthy["osc" + osc]){
+if(!synthy.notemode){
+
+    if(synthy["osc" + osc]){
+      synthy["osc" + osc].stop();  
+    };
     
-synthy["osc" + osc].stop();
+synthy["osc" + osc] = synthy.audioCtx.createOscillator();
+synthy["osc" + osc].filter = synthy.audioCtx.createBiquadFilter();
+synthy["osc" + osc].connect(synthy["osc" + osc].filter);
+synthy["osc" + osc].speaker = synthy.audioCtx.createGain();
+synthy["osc" + osc].filter.connect(synthy["osc" + osc].speaker);
+synthy["osc" + osc].speaker.connect(synthy.audioCtx.destination);
+synthy["osc" + osc].start();
 
 }
- 
-synthy["osc" + osc] = synthy.audioCtx.createOscillator();
+    
+
 synthy["osc"+osc].type = synthy.types[waveform];
-synthy["osc" + osc].speaker = synthy.audioCtx.createGain();
 synthy["osc" + osc].speaker.gain.value = volume;
 synthy["osc"+osc].frequency.value = frequency;
-synthy["osc" + osc].filter = synthy.audioCtx.createBiquadFilter();
+
 synthy["osc" + osc].filter.gain = 1;
 synthy["osc" + osc].filter.Q.value = 1;
 synthy["osc" + osc].filter.frequency.value = cutoff;
-synthy["osc" + osc].connect(synthy["osc" + osc].filter);
-synthy["osc" + osc].filter.connect(synthy["osc" + osc].speaker);
-synthy["osc" + osc].speaker.connect(synthy.audioCtx.destination);
-    
-synthy["osc" + osc].start();
-    
+
 }
 
 //Initialise oscillators

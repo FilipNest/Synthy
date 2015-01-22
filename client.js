@@ -14,7 +14,7 @@ synthy.types[1] = "sawtooth";
 synthy.types[2] = "square";
 synthy.types[3] = "triangle";
 
-synthy.init = function(osc,frequency,volume,cutoff, waveform){
+synthy.init = function(tie, osc, frequency,volume,cutoff, waveform){
     
 if(!frequency){
  
@@ -40,7 +40,7 @@ if(!waveform){
     
 }
     
-if(!synthy.notemode){
+if(typeof tie !== "boolean" || !tie){
 
     if(synthy["osc" + osc]){
       synthy["osc" + osc].stop();  
@@ -302,6 +302,7 @@ synthy.newrow = function(osc){
     
 var osc = $("#build"+osc);
 
+$(osc).find(".tie").append("<input type='checkbox' />");
 $(osc).find(".pitch").append("<input />");
 $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
@@ -314,7 +315,8 @@ $(osc).find(".cutoff").append("<input />");
 
 synthy.clearall = function(){
     
-  $(".pitch input").remove();
+$(".tie input").remove();
+$(".pitch input").remove();
 $(".length input").remove();
 $(".volume input").remove();
 $(".waveform select").remove();
@@ -353,12 +355,17 @@ var length = $(osc).find(".length").children().last().val();
 var volume = $(osc).find(".volume").children().last().val();
 var waveform = $(osc).find(".waveform").children().last().val();
 var cutoff = $(osc).find(".cutoff").children().last().val();
+var tie = $(osc).find(".tie").children().last().prop("checked");
 
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);
 $(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>").find("select").last().val(waveform);
 $(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);
+    
+console.log(tie);
+    
+$(osc).find(".tie").append("<input type='checkbox' />").find("input").last().prop("checked",tie);
  
 });
 

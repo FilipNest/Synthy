@@ -20,7 +20,7 @@ header {width:100%; padding:5px; background-color:white; margin-bottom:20px; hei
 .repeatlabel, #repeat {position:relative; top:10px;}
 .clear {clear:both;}
 .controls {clear:both; width:300px; margin:auto;}
-.buildcolumn {float:left; width:260px; margin:20px;}
+.buildcolumn {float:left; width:300px; margin:20px;}
 #play {float:left; display:block; width:100px; margin:auto;}
 #stop {float:left; display:block; width:100px; margin:auto;}
 #share {clear:both; display:block; width:100px; margin:auto; position:relative; top:5px; text-transform: uppercase;}
@@ -44,5 +44,5 @@ a:active {color:inherit;}
 
 
 @media (max-width: 950px) {
-  #phrasebuilder {width:300px;}
+  #phrasebuilder {width:380px;}
 }

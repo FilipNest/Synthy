@@ -40,7 +40,7 @@ if(!waveform){
     
 }
     
-if(tie === false || !synthy["osc" + osc]){
+if(tie === 0 || !synthy["osc" + osc]){
 
     if(synthy["osc" + osc]){
       synthy["osc" + osc].stop();  
@@ -160,7 +160,7 @@ synthy.intervals = [];
 // Trigger single note
 
 synthy.trigger = function(osc, play){
-    
+        
 // Cap volume at 1
     
 if(play.volume > 1){
@@ -418,13 +418,13 @@ if (!cutoff || isNaN(cutoff)) {
    
    };
     
-if(!tie){
+if(tie){
     
-    tie = 0;
+    tie = 1;
     
 } else {
     
-    tie = 1;
+    tie = 0;
     
 }
         
@@ -452,7 +452,7 @@ synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:pars
 //Get data from form
 
 getdata(1); getdata(2); getdata(3);
-    
+        
 //Send sequence to synthy
     
 synthy.play([synthy.seq["1"],synthy.seq["2"],synthy.seq["3"]]);

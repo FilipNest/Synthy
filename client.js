@@ -411,7 +411,6 @@ var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).val();
 var cutoff = $($(column).find(".cutoff input")[i]).val();
 var tie = $($(column).find(".tie input")[i]).prop("checked");
-
     
 if (!cutoff || isNaN(cutoff)) {
    
@@ -419,6 +418,16 @@ if (!cutoff || isNaN(cutoff)) {
    
    };
     
+if(!tie){
+    
+    tie = 0;
+    
+} else {
+    
+    tie = 1;
+    
+}
+        
 if(isNaN(pitch)){
 //Note
 var note = pitch[0].toUpperCase();
@@ -462,8 +471,7 @@ bundle+= "&osc"+sequence+"=";
 
 synthy.seq[sequence].forEach(function(element,index){
     
-    
-var note = [element.tie,element.waveform+1,element.pitch,element.time,element.volume*100,element.cutoff];
+var note = [element.waveform+1,element.pitch,element.time,element.volume*100,element.cutoff,element.tie];
     
 var pack = synthy.compression.compress(note);
 
@@ -567,8 +575,6 @@ synthy.populate = function(osc,sequences){
      
 sequences[osc-1].forEach(function(element,index){
  
-
-
 //First item
 if(index !== 0){
     
@@ -582,6 +588,7 @@ $("#build"+column).find(".volume").find("input").last().val(element.volume);
 $("#build"+column).find(".waveform").find("select").last().val(element.waveform);
 $("#build"+column).find(".length").find("input").last().val(element.time);
 $("#build"+column).find(".cutoff").find("input").last().val(element.cutoff);
+$("#build"+column).find(".tie").find("input").last().prop("checked", element.tie);
 
 });
 

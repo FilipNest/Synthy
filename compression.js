@@ -77,8 +77,9 @@ var pitch = note.substring(1,5);
 var time = note.substring(5,9);
 var volume = note.substring(9,13);
 var cutoff = note.substring(13,17);
+var tie = note.substring(17,18);
 
-return {waveform:waveform-1,pitch:pitch,time:time,volume:volume/100, cutoff: cutoff}
+return {waveform:waveform-1,pitch:pitch,time:time,volume:volume/100, cutoff: cutoff, tie:tie}
 
 }
 }

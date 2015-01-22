@@ -472,8 +472,10 @@ bundle+= "&osc"+sequence+"=";
 synthy.seq[sequence].forEach(function(element,index){
     
 var note = [element.waveform+1,element.pitch,element.time,element.volume*100,element.cutoff,element.tie];
+
+//Pack into a , seperated string
     
-var pack = synthy.compression.compress(note);
+var pack = note.join(",");
 
 //Add note
     
@@ -529,7 +531,8 @@ var decode = function(array){
 
 array.forEach(function(element,index){
 
-array[index] = synthy.compression.decompress(element);
+var note = element.split(",");
+array[index] = {waveform:note[0],pitch:note[1],time:note[2],volume:note[3]/100, cutoff: note[4], tie:note[5]};
     
 });
     
@@ -582,6 +585,22 @@ synthy.newrow(osc);
 
 }
 var column = osc;
+    
+if(isNaN(element.volume)){
+  
+    element.volume = "";
+    
+};
+        
+if(element.tie === "1"){
+    
+    element.tie = true;
+    
+} else {
+ 
+    element.tie = false;
+    
+}
     
 $("#build"+column).find(".pitch").find("input").last().val(element.pitch);
 $("#build"+column).find(".volume").find("input").last().val(element.volume);

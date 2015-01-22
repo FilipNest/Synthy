@@ -470,8 +470,8 @@ bundle+= "&osc"+sequence+"=";
 //Loop over notes for each oscillator 
 
 synthy.seq[sequence].forEach(function(element,index){
-    
-var note = [element.waveform+1,element.pitch,element.time,element.volume*100,element.cutoff,element.tie];
+
+var note = [element.waveform,element.pitch,element.time,element.volume*100,element.cutoff,element.tie];
 
 //Pack into a , seperated string
     
@@ -503,12 +503,19 @@ $("#share").attr("href",window.location.origin+"/synthy?"+bundle).text("Share th
 $("#push").text("PUSH to SYNTHY");    
 };
 
-$("#push").click(function(){
-
-synthy.socket.emit("bundle",synthy.bundle);
-
-window.location.href = $("#share").attr("href");
+$("#push").click(function(e){
     
+synthy.socket.emit("bundle",synthy.bundle);
+$("#phrasebuilder").fadeOut();
+    
+window.setTimeout(function(){
+    
+    $("#phrasebuilder").fadeIn();
+    
+},500);
+
+e.preventDefault();
+  
 });
 
 synthy.unpack = function(bundle){
@@ -528,7 +535,7 @@ second = second.split("_");
 third = third.split("_");
     
 var decode = function(array){
-
+    
 array.forEach(function(element,index){
 
 var note = element.split(",");

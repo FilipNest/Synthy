@@ -6,7 +6,7 @@ h1 {font-size-adjust: 0.65; font-weight:bold; font-style:normal; font-size:120%;
 #line1 {background-color:red; }
 #line2 {background-color:green;}
 #line3 {background-color:blue;}
-header {width:100%; padding:5px; background-color:white; margin-bottom:20px; height:28px;}
+header {width:100%; padding:5px; background-color:white; position: relative; height:28px;}
 #phrasebuilder {position:absolute; padding:10px; background-color:white; top:50px;}
 #phrasebuilder {text-align: center;}
 #phrasebuilder section {width:50px; float:left; line-height:30px;}

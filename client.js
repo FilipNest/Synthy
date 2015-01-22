@@ -368,9 +368,22 @@ $(osc).find(".tie").append("<input type='checkbox' />").find("input").last().pro
 
 //Delete row
 
-$(".delete button").on("click",function(){
+$(".deleterow").on("click",function(){
    
-console.log($(this).parent());
+var osc = $(this).parent();
+
+if ($(osc).find(".tie").find("input").length > 1) {
+   
+    $(osc).find(".tie").find("input").last().remove();
+    $(osc).find(".pitch").find("input").last().remove();
+    $(osc).find(".length").find("input").last().remove();
+    $(osc).find(".volume").find("input").last().remove();
+    $(osc).find(".waveform").find("select").last().remove();
+    $(osc).find(".cutoff").find("input").last().remove();
+    
+};
+    
+synthy.clear();
     
 });
 

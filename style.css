@@ -14,9 +14,7 @@ header {width:100%; padding:5px; background-color:white; position: relative; hei
 #phrasebuilder label {font-size:40%; font-family:arial;}
 #phrasebuilder input {width:40px; margin:0 auto 0 auto; vertical-align: bottom; height:20px;}
 #phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%; vertical-align: bottom; height:26px; margin-left:3px;}
-#phrasebuilder .delete {float:right;}
-#phrasebuilder .delete button {border-style:none; float:right; width:48px;}
-#phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px;}
+#phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px; letter-spacing: 1px;}
 .repeatlabel, #repeat {position:relative; top:10px;}
 .clear {clear:both;}
 .controls {clear:both; width:300px; margin:auto;}

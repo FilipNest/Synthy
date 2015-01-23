@@ -3,6 +3,14 @@ var synthy = {};
 // create web audio api context
 synthy.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
+//Create speaker for Synthy to output out of
+
+synthy.amplifier = synthy.audioCtx.createGain();
+
+//Compressor
+
+synthy.amplifier.connect(synthy.audioCtx.destination);
+
 //Set maximum frequency
         
 synthy.top = 7902;
@@ -14,7 +22,7 @@ synthy.types[1] = "sawtooth";
 synthy.types[2] = "square";
 synthy.types[3] = "triangle";
 
-synthy.init = function(osc, frequency,volume,cutoff, waveform, tie){
+synthy.init = function(osc, frequency,volume,cutoff, resonance, waveform, tie){
     
 if(!frequency){
  
@@ -51,7 +59,7 @@ synthy["osc" + osc].filter = synthy.audioCtx.createBiquadFilter();
 synthy["osc" + osc].connect(synthy["osc" + osc].filter);
 synthy["osc" + osc].speaker = synthy.audioCtx.createGain();
 synthy["osc" + osc].filter.connect(synthy["osc" + osc].speaker);
-synthy["osc" + osc].speaker.connect(synthy.audioCtx.destination);
+synthy["osc" + osc].speaker.connect(synthy.amplifier);
 synthy["osc" + osc].start();
 
 }
@@ -60,11 +68,9 @@ synthy["osc" + osc].start();
 synthy["osc"+osc].type = synthy.types[waveform];
 synthy["osc" + osc].speaker.gain.value = volume;
 synthy["osc"+osc].frequency.value = frequency;
-
-synthy["osc" + osc].filter.gain = 1;
-synthy["osc" + osc].filter.Q.value = 1;
+synthy["osc" + osc].filter.Q.value = resonance;
 synthy["osc" + osc].filter.frequency.value = cutoff;
-
+    
 }
 
 //Initialise oscillators
@@ -169,7 +175,7 @@ play.volume = 1;
     
 }
     
-synthy.init(osc,play.pitch, play.volume, play.cutoff, play.waveform, play.tie);
+synthy.init(osc,play.pitch, play.volume, play.cutoff, play.resonance, play.waveform, play.tie);
 
 //Start note
     
@@ -433,7 +439,16 @@ var length = $($(column).find(".length input")[i]).val();
 var volume = $($(column).find(".volume input")[i]).val();
 var waveform = $($(column).find(".waveform select")[i]).val();
 var cutoff = $($(column).find(".cutoff input")[i]).val();
+var random = $($(column).find(".random input")[i]).val();
+var resonance = $($(column).find(".resonance input")[i]).val();
 var tie = $($(column).find(".tie input")[i]).prop("checked");
+    
+
+if(resonance > 1000){
+  
+    resonance = 1000;
+    
+};
     
 if (!cutoff || isNaN(cutoff)) {
    
@@ -466,7 +481,7 @@ pitch = synthy.notes[note].frequencies[octave];
     
 if(pitch && length){
 
-synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff), tie:tie});
+synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff), resonance:resonance, tie:tie});
 }
 }
    
@@ -494,7 +509,7 @@ bundle+= "&osc"+sequence+"=";
 
 synthy.seq[sequence].forEach(function(element,index){
 
-var note = [element.waveform,element.pitch,element.time,element.volume*100,element.cutoff,element.tie];
+var note = [element.waveform,element.pitch,element.time,element.volume*100,element.cutoff, element.resonance, element.tie];
 
 //Pack into a , seperated string
     
@@ -562,7 +577,7 @@ var decode = function(array){
 array.forEach(function(element,index){
 
 var note = element.split(",");
-array[index] = {waveform:note[0],pitch:note[1],time:note[2],volume:note[3]/100, cutoff: note[4], tie:note[5]};
+array[index] = {waveform:note[0],pitch:note[1],time:note[2],volume:note[3]/100, cutoff: note[4], resonance: note[5], tie:note[6]};
     
 });
     
@@ -637,6 +652,7 @@ $("#build"+column).find(".volume").find("input").last().val(element.volume);
 $("#build"+column).find(".waveform").find("select").last().val(element.waveform);
 $("#build"+column).find(".length").find("input").last().val(element.time);
 $("#build"+column).find(".cutoff").find("input").last().val(element.cutoff);
+$("#build"+column).find(".resonance").find("input").last().val(element.resonance);
 $("#build"+column).find(".tie").find("input").last().prop("checked", element.tie);
 
 });

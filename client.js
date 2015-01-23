@@ -484,7 +484,7 @@ pitch = synthy.notes[note].frequencies[octave];
     
 if(pitch && length){
 
-synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff), resonance:resonance, tie:tie});
+synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff), resonance:resonance, tie:tie, random:random});
 }
 }
    
@@ -512,7 +512,7 @@ bundle+= "&osc"+sequence+"=";
 
 synthy.seq[sequence].forEach(function(element,index){
 
-var note = [element.waveform,element.pitch,element.time,element.volume*100,element.cutoff, element.resonance, element.tie];
+var note = [element.waveform,element.pitch,element.time,element.volume*100,element.cutoff, element.resonance, element.tie, element.random];
 
 //Pack into a , seperated string
     
@@ -580,7 +580,7 @@ var decode = function(array){
 array.forEach(function(element,index){
 
 var note = element.split(",");
-array[index] = {waveform:note[0],pitch:note[1],time:note[2],volume:note[3]/100, cutoff: note[4], resonance: note[5], tie:note[6]};
+array[index] = {waveform:note[0],pitch:note[1],time:note[2],volume:note[3]/100, cutoff: note[4], resonance: note[5], tie:note[6], random:note[7]};
     
 });
     
@@ -656,6 +656,7 @@ $("#build"+column).find(".waveform").find("select").last().val(element.waveform)
 $("#build"+column).find(".length").find("input").last().val(element.time);
 $("#build"+column).find(".cutoff").find("input").last().val(element.cutoff);
 $("#build"+column).find(".resonance").find("input").last().val(element.resonance);
+$("#build"+column).find(".random").find("input").last().val(element.random);
 $("#build"+column).find(".tie").find("input").last().prop("checked", element.tie);
 
 });

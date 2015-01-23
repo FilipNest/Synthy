@@ -63,14 +63,17 @@ synthy["osc" + osc].speaker.connect(synthy.amplifier);
 synthy["osc" + osc].start();
 
 }
-    
-
+ 
 synthy["osc"+osc].type = synthy.types[waveform];
 synthy["osc" + osc].speaker.gain.value = volume;
 synthy["osc"+osc].frequency.value = frequency;
-synthy["osc" + osc].filter.Q.value = resonance;
-synthy["osc" + osc].filter.frequency.value = cutoff;
     
+if(cutoff){
+synthy["osc" + osc].filter.Q.value = resonance;
+}
+if(resonance){
+synthy["osc" + osc].filter.frequency.value = cutoff;
+}
 }
 
 //Initialise oscillators

@@ -22,7 +22,43 @@ synthy.types[1] = "sawtooth";
 synthy.types[2] = "square";
 synthy.types[3] = "triangle";
 
-synthy.init = function(osc, frequency,volume,cutoff, resonance, waveform, tie){
+synthy.init = function(osc, frequency,volume,cutoff, resonance, waveform, tie, random){
+
+if(random){
+    
+random = random.toString();
+var change = {};
+    
+//Split out randomness values
+    
+change.frequency = random[0];
+change.volume = random[1];
+  
+//General randomising function
+    
+var randomise = function(input,top,randomness){
+    
+    var offset = (top/100) * randomness/50,
+        min = input - offset,
+        max = input + offset;
+    
+    return Math.random()*(min-max+1)+min;
+    
+};
+    
+if(change.frequency){
+  
+    frequency = randomise(frequency,synthy.top,change.frequency);
+    
+};
+    
+if(change.volume){
+  
+    volume = randomise(volume,1,change.volume);
+    
+};
+
+}
     
 if(!frequency){
  
@@ -178,7 +214,7 @@ play.volume = 1;
     
 }
     
-synthy.init(osc,play.pitch, play.volume, play.cutoff, play.resonance, play.waveform, play.tie);
+synthy.init(osc,play.pitch, play.volume, play.cutoff, play.resonance, play.waveform, play.tie, play.random);
 
 //Start note
     

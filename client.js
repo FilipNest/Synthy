@@ -306,6 +306,8 @@ $(osc).find(".tie").append("<input type='checkbox' />");
 $(osc).find(".pitch").append("<input />");
 $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
+$(osc).find(".resonance").append("<input />");
+$(osc).find(".random").append("<input />");
 $(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>");
 $(osc).find(".cutoff").append("<input />");
     
@@ -319,8 +321,10 @@ $(".tie input").remove();
 $(".pitch input").remove();
 $(".length input").remove();
 $(".volume input").remove();
-$(".waveform select").remove();
+$(".resonance input").remove();
+$(".random input").remove();
 $(".cutoff input").remove();
+$(".waveform select").remove();
     
 //Make starting rows
     
@@ -356,12 +360,16 @@ var volume = $(osc).find(".volume").children().last().val();
 var waveform = $(osc).find(".waveform").children().last().val();
 var cutoff = $(osc).find(".cutoff").children().last().val();
 var tie = $(osc).find(".tie").children().last().prop("checked");
+var resonance = $(osc).find(".resonance").children().last().val();
+var random = $(osc).find(".random").children().last().val();
 
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);
 $(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>").find("select").last().val(waveform);
-$(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);    
+$(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);
+$(osc).find(".resonance").append("<input />").find("input").last().val(resonance); 
+$(osc).find(".random").append("<input />").find("input").last().val(random); 
 $(osc).find(".tie").append("<input type='checkbox' />").find("input").last().prop("checked",tie);
  
 });
@@ -380,6 +388,8 @@ if ($(osc).find(".tie").find("input").length > 1) {
     $(osc).find(".volume").find("input").last().remove();
     $(osc).find(".waveform").find("select").last().remove();
     $(osc).find(".cutoff").find("input").last().remove();
+    $(osc).find(".random").find("input").last().remove();
+    $(osc).find(".resonance").find("input").last().remove();
     
 };
     

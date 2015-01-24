@@ -1,3 +1,27 @@
+var phasebuilder = "";
+
+$(document).ready(function(){
+   
+    window.setTimeout(function(){
+       
+        $("body").fadeIn("slow");
+        
+    },500);
+    
+    $("#abouttoggle").click(function(){
+        
+        $("#about").show();
+
+    });
+    
+    $("#about button").click(function(){
+        
+        $("#about").hide();
+    
+    });
+    
+});
+
 var synthy = {};
         
 // create web audio api context
@@ -7,13 +31,22 @@ synthy.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 synthy.amplifier = synthy.audioCtx.createGain();
 
-//Compressor
+//Three limiters to save ears
 
-synthy.limiter = synthy.audioCtx.createDynamicsCompressor();
-synthy.limiter.threshold.value = -50;
-synthy.limiter.ratio.value = 20;
+synthy.limiter1 = synthy.audioCtx.createDynamicsCompressor();
+synthy.limiter1.threshold.value = -50;
+synthy.limiter1.ratio.value = 20;
+synthy.limiter1.connect(synthy.audioCtx.destination);
 
-synthy.limiter.connect(synthy.audioCtx.destination);
+synthy.limiter2 = synthy.audioCtx.createDynamicsCompressor();
+synthy.limiter2.threshold.value = -50;
+synthy.limiter2.ratio.value = 20;
+synthy.limiter2.connect(synthy.audioCtx.destination);
+
+synthy.limiter3 = synthy.audioCtx.createDynamicsCompressor();
+synthy.limiter3.threshold.value = -50;
+synthy.limiter3.ratio.value = 20;
+synthy.limiter3.connect(synthy.audioCtx.destination);
 
 //Amplifier 
 
@@ -141,7 +174,7 @@ synthy["osc" + osc].filter = synthy.audioCtx.createBiquadFilter();
 synthy["osc" + osc].connect(synthy["osc" + osc].filter);
 synthy["osc" + osc].speaker = synthy.audioCtx.createGain();
 synthy["osc" + osc].filter.connect(synthy["osc" + osc].speaker);
-synthy["osc" + osc].speaker.connect(synthy.limiter);
+synthy["osc" + osc].speaker.connect(synthy["limiter"+osc]);
     
 if(synthy["osc" + osc] !== synthy["noise" + osc]){
     synthy["osc" + osc].start();

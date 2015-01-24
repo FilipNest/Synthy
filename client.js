@@ -21,6 +21,31 @@ synthy.types[0] = "sine";
 synthy.types[1] = "sawtooth";
 synthy.types[2] = "square";
 synthy.types[3] = "triangle";
+synthy.types[4] = "noise";
+
+//Noise!
+
+var bufferSize = 2 * synthy.audioCtx.sampleRate,
+    noiseBuffer = synthy.audioCtx.createBuffer(1, bufferSize, synthy.audioCtx.sampleRate),
+    output = noiseBuffer.getChannelData(0);
+for (var i = 0; i < bufferSize; i++) {
+    output[i] = Math.random() * 2 - 1;
+}
+
+var whiteNoise = synthy.audioCtx.createBufferSource();
+whiteNoise.buffer = noiseBuffer;
+whiteNoise.loop = true;
+whiteNoise.start(0);
+
+synthy.noise1 = synthy.audioCtx.createGain()
+synthy.noise2 = synthy.audioCtx.createGain()
+synthy.noise3 = synthy.audioCtx.createGain()
+
+whiteNoise.connect(synthy.noise1);
+whiteNoise.connect(synthy.noise2);
+whiteNoise.connect(synthy.noise3);
+
+//End Noise
 
 synthy.init = function(osc, frequency,volume,cutoff, resonance, waveform, tie, random){
 
@@ -86,23 +111,41 @@ if(!waveform){
     
 if(tie === 0 || !synthy["osc" + osc]){
 
-    if(synthy["osc" + osc]){
+    if(synthy["osc" + osc] && synthy["osc" + osc] !== synthy["noise" + osc]){
       synthy["osc" + osc].stop();  
     };
     
+//Disconnect noise
+    
+if(synthy["osc"+osc] && synthy["osc"+osc].filter){
+synthy["noise"+osc].disconnect(synthy["osc"+osc].filter);
+}
+
+if(waveform == 4){
+ 
+synthy["osc" + osc] = synthy["noise"+osc];
+    
+} else {
+    
 synthy["osc" + osc] = synthy.audioCtx.createOscillator();
+
+}
+    
 synthy["osc" + osc].filter = synthy.audioCtx.createBiquadFilter();
 synthy["osc" + osc].connect(synthy["osc" + osc].filter);
 synthy["osc" + osc].speaker = synthy.audioCtx.createGain();
 synthy["osc" + osc].filter.connect(synthy["osc" + osc].speaker);
 synthy["osc" + osc].speaker.connect(synthy.amplifier);
-synthy["osc" + osc].start();
+    
+if(synthy["osc" + osc] !== synthy["noise" + osc]){
+    synthy["osc" + osc].start();
+    synthy["osc"+osc].frequency.value = frequency;
+}
 
 }
  
 synthy["osc"+osc].type = synthy.types[waveform];
-synthy["osc" + osc].speaker.gain.value = volume;
-synthy["osc"+osc].frequency.value = frequency;
+synthy["osc" + osc].speaker.gain.value = volume/2;
     
 if(cutoff){
 synthy["osc" + osc].filter.Q.value = resonance;
@@ -128,8 +171,7 @@ frequency = top;
     
 }
 
-//synthy["osc"+osc].frequency.value = frequency;
-
+if(synthy["osc"+osc] !== synthy["noise"+osc]){
 synthy["osc"+osc].frequency.note = synthy.note(frequency);
 
 //Change colour
@@ -137,6 +179,7 @@ synthy["osc"+osc].frequency.note = synthy.note(frequency);
 synthy.colourchange(osc,synthy["osc"+osc].frequency.note)
     
 return synthy["osc"+osc];
+}
     
 };
         
@@ -353,7 +396,7 @@ $(osc).find(".length").append("<input />");
 $(osc).find(".volume").append("<input />");
 $(osc).find(".resonance").append("<input />");
 $(osc).find(".random").append("<input />");
-$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>");
+$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option><option value='4'>Noise</option></select>");
 $(osc).find(".cutoff").append("<input />");
     
 };
@@ -411,7 +454,7 @@ var random = $(osc).find(".random").children().last().val();
 $(osc).find(".pitch").append("<input />").find("input").last().val(pitch);
 $(osc).find(".length").append("<input />").find("input").last().val(length);
 $(osc).find(".volume").append("<input />").find("input").last().val(volume);
-$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option></select>").find("select").last().val(waveform);
+$(osc).find(".waveform").append("<select><option value='0'>Sine</option><option value='1'>Saw</option><option value='2'>Square</option><option value='3'>Triangle</option><option value='4'>Noise</option</select>").find("select").last().val(waveform);
 $(osc).find(".cutoff").append("<input />").find("input").last().val(cutoff);
 $(osc).find(".resonance").append("<input />").find("input").last().val(resonance); 
 $(osc).find(".random").append("<input />").find("input").last().val(random); 
@@ -483,11 +526,11 @@ var resonance = $($(column).find(".resonance input")[i]).val();
 var tie = $($(column).find(".tie input")[i]).prop("checked");
     
 
-if(resonance > 1000){
-  
-    resonance = 1000;
+if(!resonance || isNaN(resonance)){
+ 
+    resonance = 1;
     
-};
+}
     
 if (!cutoff || isNaN(cutoff)) {
    

@@ -9,6 +9,14 @@ synthy.amplifier = synthy.audioCtx.createGain();
 
 //Compressor
 
+synthy.limiter = synthy.audioCtx.createDynamicsCompressor();
+synthy.limiter.threshold.value = -50;
+synthy.limiter.ratio.value = 20;
+
+compressor.connect(synthy.audioCtx.destination);
+
+//Amplifier 
+
 synthy.amplifier.connect(synthy.audioCtx.destination);
 
 //Set maximum frequency
@@ -44,8 +52,6 @@ synthy.noise3 = synthy.audioCtx.createGain()
 whiteNoise.connect(synthy.noise1);
 whiteNoise.connect(synthy.noise2);
 whiteNoise.connect(synthy.noise3);
-
-//End Noise
 
 synthy.init = function(osc, frequency,volume,cutoff, resonance, waveform, tie, random){
 
@@ -135,17 +141,17 @@ synthy["osc" + osc].filter = synthy.audioCtx.createBiquadFilter();
 synthy["osc" + osc].connect(synthy["osc" + osc].filter);
 synthy["osc" + osc].speaker = synthy.audioCtx.createGain();
 synthy["osc" + osc].filter.connect(synthy["osc" + osc].speaker);
-synthy["osc" + osc].speaker.connect(synthy.amplifier);
+synthy["osc" + osc].speaker.connect(synthy.limiter);
     
 if(synthy["osc" + osc] !== synthy["noise" + osc]){
     synthy["osc" + osc].start();
     synthy["osc"+osc].frequency.value = frequency;
 }
-
+    
 }
  
 synthy["osc"+osc].type = synthy.types[waveform];
-synthy["osc" + osc].speaker.gain.value = volume/2;
+synthy["osc" + osc].speaker.gain.value = volume;
     
 if(resonance){
 synthy["osc" + osc].filter.Q.value = resonance;
@@ -153,6 +159,7 @@ synthy["osc" + osc].filter.Q.value = resonance;
 if(cutoff){
 synthy["osc" + osc].filter.frequency.value = cutoff;
 }
+    
 }
 
 //Initialise oscillators

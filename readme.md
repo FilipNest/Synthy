@@ -1,5 +1,3 @@
-<div class="about">
-<button id="closeabout">Back to synthy</button>
 <h2>About Synthy</h2>   
 <p>Synthy is an online synthesiser with live world output and colours made by Filip Hnízdo using the Web Audio API (the live world server is powered by Socket.IO and Node.js).</p>
 <p>Synthy was originally built in the summer of 2014 as a present for Fiona Shipwright and has been expanded since then.</p>

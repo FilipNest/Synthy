@@ -147,10 +147,10 @@ if(synthy["osc" + osc] !== synthy["noise" + osc]){
 synthy["osc"+osc].type = synthy.types[waveform];
 synthy["osc" + osc].speaker.gain.value = volume/2;
     
-if(cutoff){
+if(resonance){
 synthy["osc" + osc].filter.Q.value = resonance;
 }
-if(resonance){
+if(cutoff){
 synthy["osc" + osc].filter.frequency.value = cutoff;
 }
 }

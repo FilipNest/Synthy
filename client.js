@@ -13,7 +13,7 @@ synthy.limiter = synthy.audioCtx.createDynamicsCompressor();
 synthy.limiter.threshold.value = -50;
 synthy.limiter.ratio.value = 20;
 
-compressor.connect(synthy.audioCtx.destination);
+synthy.limiter.connect(synthy.audioCtx.destination);
 
 //Amplifier 
 

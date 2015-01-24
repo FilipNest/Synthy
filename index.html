@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Synthy : A collaborative synthesizer">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Synthy</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/FilipNest/Synthy">View on GitHub</a>
+
+          <h1 id="project_title">Synthy</h1>
+          <h2 id="project_tagline">A collaborative synthesizer</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/FilipNest/Synthy/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/FilipNest/Synthy/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="about-synthy" class="anchor" href="#about-synthy" aria-hidden="true"><span class="octicon octicon-link"></span></a>About Synthy</h1>
+
+<p>Synthy is an online synthesiser with live world output and colours made by Filip Hnízdo using the Web Audio API (the live world server is powered by Socket.IO and Node.js).</p>
+
+<p><a href="http://filipnest.com/synthy">VISIT SYNTHY</a></p>
+
+<p>Synthy was originally built in the summer of 2014 as a present for Fiona Shipwright and has been expanded since then.</p>
+
+<h2>
+<a id="controls" class="anchor" href="#controls" aria-hidden="true"><span class="octicon octicon-link"></span></a>Controls</h2>
+
+<p>Synthy has three oscillators which can be set to play sine waves, sawtooth waves, square waves, triangle waves but can also be piped through to a source of white noise.</p>
+
+<p>Synthy works in rows, much like a tracker. Each oscillator can have several rows and each will be played after the previous row has finished. Each oscillator works independently from the others but waits until the oscillator with the longest pattern has finished before starting again.</p>
+
+<p>You can set frequency for each oscillator row (does't work for white noise as the frequencies are all already there, somewhere) using hz or typing note values with the note name followed by an octave number.</p>
+
+<p>You can set a gain/volume for each oscillator row using a value between 0 and 1.  There is a limiter in place for each oscillator to stop things getting too loud and hurting you.</p>
+
+<p>You can set a cut off point and resonance/q factor for each oscillator step. These are raw values and can lead to unpredictable things.</p>
+
+<p>You can randomise the pitch and volume by using two consequtive digits (for amount of randomness followed by each other) 70 for very random freqency and regular volume.</p>
+
+<h2>
+<a id="sharing" class="anchor" href="#sharing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sharing</h2>
+
+<p>Each pattern has a unique URL which you can get using the SHARE button.</p>
+
+<p>Patterns can also be pushed to synthy so that the whole world can hear them, live, if they are on the listen page.</p>
+
+<p>Please suggest improvements by posting a new issue on GitHub</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Synthy maintained by <a href="https://github.com/FilipNest">FilipNest</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-58916270-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>

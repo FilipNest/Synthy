@@ -178,9 +178,13 @@ synthy["osc" + osc].speaker.connect(synthy["limiter"+osc]);
     
 if(synthy["osc" + osc] !== synthy["noise" + osc]){
     synthy["osc" + osc].start();
-    synthy["osc"+osc].frequency.value = frequency;
+    
 }
     
+}
+ 
+if(synthy["osc" + osc] !== synthy["noise" + osc]){
+synthy["osc"+osc].frequency.value = frequency;
 }
  
 synthy["osc"+osc].type = synthy.types[waveform];

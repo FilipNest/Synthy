@@ -3,6 +3,7 @@
 <head>
 <title>Synthy</title>
 <link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="//f.fontdeck.com/s/css/L17svjkWP3rDo8YMHOWDdMmE4Lc/filipnest.com/48307.css" type="text/css" />
 </head>
 
 <body>
@@ -11,24 +12,40 @@
 
 <header>
     
-<header>
-    
 <h1>Synthy <div id="line1" class="line"></div> <div id="line2" class="line"></div> <div id="line3" class="line"></div></h1>
 <h2><a href="http://filipnest.github.io/Synthy/">About</a></h2>
-<h2 class="active"><a href="player.html">Synthy Live</a></h2>
-<h2><a href="song.html">Create Song</a></h2>
+<h2><a href="player.html">Synthy Live</a></h2>
+<h2 class="active"><a href="song.html">Create Song</a></h2>
 <h2><a href="index.html">Create Pattern</a></h2>
 </header>
-
+    
 <!-- Ocillators -->
 
 <div class="osc off" id="osc1"></div>
 <div class="osc off" id="osc2"></div>
 <div class="osc off" id="osc3"></div>
+
+<!-- Phrase form -->
+
+<form id="songbuilder">
+<h2>Paste in pattern URLS</h2>
+<h3>New line, new pattern.</h3>
+<ul id="song">
+<li class="songrow"><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button>START</button> <button>UP</button><button>DOWN</button></li>
+</ul>
+<button id="newsongline">New line</button><button id="removesongline">Remove line</button>
+<hr>
+<button>STOP</button> &nbsp;&nbsp;&nbsp; <label>Repeat?</label><input id="repeat" type="checkbox"><br />
+<button>SHARE</button>
+<button>LOAD</button>
+    
+</form>
+    
+
     
 <!-- Phrase Builder -->
     
-<form id="phrasebuilder" style="display:none;">
+<form style="display:none;" id="phrasebuilder">
     
 <div id="build1" class="buildcolumn">
 
@@ -171,29 +188,25 @@
 </section>
     
 <div class="clear"></div>
+<button type="button" class="newrow">New row</button>
+<button type="button" class="clonerow">Clone row</button>
+<button type="button" class="deleterow">Delete row</button>
 
-    <div class="controls">
-<button type="button" id="play">Play</button>
-<button type="button" id="stop">Stop</button>
-<span class="repeatlabel">Repeat</span><input id="repeat" type="checkbox" checked><br />
-<span id="share">Copy URL to share/save</span>
-<button type="button" id="push">Push to Synthy</button>
-    </div>
-
-    
 </div>
- 
-</form>
 
+</form>
 
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="client.js"></script>
-<link rel="stylesheet" href="//f.fontdeck.com/s/css/L17svjkWP3rDo8YMHOWDdMmE4Lc/filipnest.com/48307.css" type="text/css" />
 </body>
     
 <!-- Connect to server -->
 <script src="https://cdn.socket.io/socket.io-1.3.0.js"></script>
+
+<script>
+synthy.songmode = true;    
+</script>
     
 <!-- Google Analytics -->
     
@@ -207,30 +220,5 @@
   ga('send', 'pageview');
 
 </script>
-    
-<script>
-$(document).ready(function(){
-synthy.player = true;
-synthy.socket.on('synth', function (data) {
-if(data){
-    
-    synthy.clearall();
 
-    var unpacked = synthy.unpack(data);
-    
-    synthy.populate(1,unpacked);
-    synthy.populate(2,unpacked);
-    synthy.populate(3,unpacked);
-    
-    window.setTimeout(function(){
-        
-        synthy.startphrase();
-        
-    },1000)
-
-}
-  });
-})
-</script>
-    
 </html>

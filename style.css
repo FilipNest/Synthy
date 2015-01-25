@@ -13,13 +13,15 @@ header h2 {margin:0px; font-size:30px; float:right; margin-right:20px; cursor: p
 a:link {text-decoration: none;}
 header h2:hover, header h2.active {text-decoration: underline;}
 #phrasebuilder {position:absolute; padding:10px; background-color:white; top:50px;}
+#songbuilder {position:absolute; padding:10px; background-color:white; top:50px; width:400px;}
+#songbuilder h2, #songbuilder h3 {padding:0px; margin:0px;}
 #phrasebuilder {text-align: center;}
 #phrasebuilder section {width:50px; float:left; line-height:30px;}
 #phrasebuilder h3 {font-size:85%; text-transform: uppercase; margin:0px; line-height:5px;}
 #phrasebuilder label {font-size:35%; font-family:arial;}
 #phrasebuilder input {width:40px; margin:0 auto 0 auto; vertical-align: bottom; height:20px;}
 #phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%; vertical-align: bottom; height:26px; margin-left:3px;}
-#phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px; letter-spacing: 1px;}
+#phrasebuilder button, #songbuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px; letter-spacing: 1px;}
 .repeatlabel, #repeat {position:relative; top:10px; left:6px;}
 .clear {clear:both;}
 .controls {clear:both; width:300px; margin:auto;}

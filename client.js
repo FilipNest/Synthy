@@ -700,14 +700,15 @@ bundle += "_"
 synthy.bundle = bundle;
     
 //Clear output
-    
+
+if(!synthy.songmode){    
 history.pushState({}, document.title, window.location.origin+"?"+bundle)
 
 //Set output
 $("#push").show();
 $("#share").css("display","block");    
 $("#push").text("Push to synthy");
-
+}
 };
 
 $("#push").click(function(e){
@@ -886,3 +887,52 @@ $(".buildcolumn select").remove();
 if (!window.location.origin) {
   window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
 }
+
+//SONG MODE
+
+$("body").on("click", "button", function(e){
+    
+e.preventDefault();
+    
+});
+
+$("#newsongline").click(function(){
+   
+$(".songrow:last").after('<li class="songrow"><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button>START</button> <button>UP</button><button>DOWN</button></li>');
+    
+});
+
+$("#removesongline").click(function(){
+
+if ($(".songrow").length > 1){
+    
+$(".songrow:last").remove();
+    
+}
+    
+});
+
+$("#songbuilder").on("click",".triggerpattern",function(){
+     
+    synthy.playlistmode = true;
+    
+    var loaded = ($(this).parent().find(".songpattern").val());
+    var startpoint = $("#song li").index($(this).parent());
+    
+    var song = [];
+    
+    $(".songpattern").each(function(number,element){
+       
+        song.push(synthy.unpack($(element).val()));
+        
+    });
+    
+    synthy.clearall();
+    
+    synthy.populate(1,song[startpoint]);
+    synthy.populate(2,song[startpoint]);
+    synthy.populate(3,song[startpoint]);
+    
+    synthy.startphrase();
+    
+});

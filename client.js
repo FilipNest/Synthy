@@ -667,8 +667,8 @@ synthy.bundle = bundle;
 history.pushState({}, document.title, window.location.origin+"/synthy?"+bundle)
 
 //Set output
-
 $("#push").show();
+$("#share").css("display","block");    
 $("#push").text("Push to synthy");
 
 };

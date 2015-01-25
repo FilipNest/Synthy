@@ -27,6 +27,7 @@ header h2:hover, header h2.active {text-decoration: underline;}
 #play {float:left; display:block; width:100px; margin:auto;}
 #stop {float:left; display:block; width:100px; margin:auto;}
 #push {clear:both; margin:auto; width:100%; display: none;}
+#share {display: none; clear: both; margin-top:23px; text-transform: uppercase; font-weight: bold; font-size:19px; letter-spacing: 1px;}
 a:link {color:inherit;}
 a:visited {color:inherit;}
 a:active {color:inherit;}

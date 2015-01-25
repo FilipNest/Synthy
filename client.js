@@ -605,6 +605,14 @@ var octave = pitch[pitch.length-1];
 pitch = synthy.notes[note].frequencies[octave];    
    }
     
+if(waveform == "4"){
+    
+    pitch = "9999";
+    
+}
+    
+console.log(pitch);
+    
 if(pitch && length){
 
 synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff), resonance:resonance, tie:tie, random:random});

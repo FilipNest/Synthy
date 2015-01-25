@@ -381,9 +381,18 @@ synthy.currentphrase();
 
 synthy.end = function(){
 if(synthy.player || document.getElementById('repeat').checked){
+
+if(synthy.changed){
+  
+    synthy.changed = false;
+    synthy.startphrase();
     
-synthy.currentphrase();
+} else {
+
+    synthy.currentphrase();
     
+}
+   
 }
     
     
@@ -811,7 +820,7 @@ $(osc).removeClass("on").addClass("off");
 
 $("form").change(function(){
 if(synthy.currentphrase){
-synthy.startphrase();
+synthy.changed = true;
 }
 });
 

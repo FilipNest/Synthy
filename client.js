@@ -216,14 +216,18 @@ frequency = top;
 }
 
 if(synthy["osc"+osc] !== synthy["noise"+osc]){
+    
 synthy["osc"+osc].frequency.note = synthy.note(frequency);
 
 //Change colour
     
 synthy.colourchange(osc,synthy["osc"+osc].frequency.note)
-    
 return synthy["osc"+osc];
-}
+} else {
+  
+    synthy.colourchange(osc,{octave:0,note:"NOISE",offset:0});
+    
+};
     
 };
         
@@ -242,6 +246,7 @@ synthy.notes["G#"] = {frequencies:[26,52,104,208,415,831,1661,3322,6645],name:"G
 synthy.notes["A"] = {frequencies:[28,55,110,220,440,880,1760,3520,7040],name:"A",colour:"#660099"};
 synthy.notes["A#"] = {frequencies:[29,58,117,233,466,932,1865,3729,7459],name:"A#",colour:"#990088"};
 synthy.notes["B"] = {frequencies:[31,62,124,247,494,988,1976,3951,7902],name:"B",colour:"#CC00AA"};
+synthy.notes["NOISE"] = {frequencies:[9999],name:"NOISE",colour:"#FFFFFF"};
 
 //Frequency to note converter (with offset)
         

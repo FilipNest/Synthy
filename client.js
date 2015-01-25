@@ -207,8 +207,16 @@ synthy.init(3);
         
 //Functions for changing pitch
         
-synthy.pitch = function(osc, frequency){
+synthy.pitch = function(osc, frequency, volume){
 
+var on = true;
+    
+if(volume == "0"){
+  
+    var on = false;
+    
+}
+    
 if (frequency > synthy.top){
     
 frequency = top;
@@ -221,11 +229,11 @@ synthy["osc"+osc].frequency.note = synthy.note(frequency);
 
 //Change colour
     
-synthy.colourchange(osc,synthy["osc"+osc].frequency.note)
+synthy.colourchange(osc,synthy["osc"+osc].frequency.note,on)
 return synthy["osc"+osc];
 } else {
   
-    synthy.colourchange(osc,{octave:0,note:"NOISE",offset:0});
+    synthy.colourchange(osc,{octave:0,note:"NOISE",offset:0},on);
     
 };
     
@@ -247,6 +255,7 @@ synthy.notes["A"] = {frequencies:[28,55,110,220,440,880,1760,3520,7040],name:"A"
 synthy.notes["A#"] = {frequencies:[29,58,117,233,466,932,1865,3729,7459],name:"A#",colour:"#990088"};
 synthy.notes["B"] = {frequencies:[31,62,124,247,494,988,1976,3951,7902],name:"B",colour:"#CC00AA"};
 synthy.notes["NOISE"] = {frequencies:[9999],name:"NOISE",colour:"#FFFFFF"};
+synthy.notes["EMPTY"] = {frequencies:[9999],name:"NOISE",colour:"#000000"};
 
 //Frequency to note converter (with offset)
         
@@ -285,9 +294,20 @@ return chosen;
     
 }
 
-synthy.colourchange = function(osc,note){
-document.getElementById('osc'+osc).style.background = synthy.notes[note.note].colour;
-document.getElementById('osc'+osc).style.color = synthy.notes[note.note].colour;
+synthy.colourchange = function(osc,note,on){
+    if(on){
+        
+    document.getElementById('osc'+osc).style.opacity = "1";
+    document.getElementById('osc'+osc).style.background = synthy.notes[note.note].colour;
+    document.getElementById('osc'+osc).style.color = synthy.notes[note.note].colour;
+        
+    } else {
+        
+    document.getElementById('osc'+osc).style.opacity = "0";
+    document.getElementById('osc'+osc).style.background = "#333333";
+    document.getElementById('osc'+osc).style.color = "#333333";
+        
+    }
     
 }
 
@@ -309,9 +329,10 @@ play.volume = 1;
 synthy.init(osc,play.pitch, play.volume, play.cutoff, play.resonance, play.waveform, play.tie, play.random);
 
 //Start note
-    
+
+
 synthy.glow(osc,play.time);
-synthy.pitch(osc,play.pitch);
+synthy.pitch(osc,play.pitch,play.volume);
 
 };
 

@@ -516,6 +516,8 @@ synthy.newrow(osc);
 });
 
 $(".clonerow").on("click",function(){
+    
+synthy.changed = true;
 
 var osc = $(this).parent().attr("id").replace("build", "");
 
@@ -560,7 +562,7 @@ if ($(osc).find(".tie").find("input").length > 1) {
     
 };
     
-synthy.clear();
+synthy.changed = true;
     
 });
 

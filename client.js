@@ -664,7 +664,7 @@ synthy.bundle = bundle;
     
 //Clear output
     
-history.pushState({}, document.title, window.location.origin+"/synthy?"+bundle)
+history.pushState({}, document.title, window.location.origin+"?"+bundle)
 
 //Set output
 $("#push").show();

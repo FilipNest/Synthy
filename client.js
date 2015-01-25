@@ -610,9 +610,7 @@ if(waveform == "4"){
     pitch = "9999";
     
 }
-    
-console.log(pitch);
-    
+        
 if(pitch && length){
 
 synthy.seq[osc].push({pitch:parseFloat(pitch),time:parseInt(length), volume:parseFloat(volume), waveform:parseInt(waveform), cutoff:parseInt(cutoff), resonance:resonance, tie:tie, random:random});
@@ -666,23 +664,25 @@ synthy.bundle = bundle;
     
 //Clear output
     
-$("#share").attr("href"," ");
-$("#push").attr("href"," ");
+history.pushState({}, document.title, window.location.origin+"/synthy?"+bundle)
 
 //Set output
 
-$("#share").attr("href",window.location.origin+"/synthy?"+bundle).text("Share this phrase");
-$("#push").text("PUSH to SYNTHY");    
+$("#push").show();
+$("#push").text("Push to synthy");
+
 };
 
 $("#push").click(function(e){
     
 synthy.socket.emit("bundle",synthy.bundle);
+    
 $("#phrasebuilder").fadeOut();
     
 window.setTimeout(function(){
     
     $("#phrasebuilder").fadeIn();
+    $("#push").text("Pushed to Synthy")
     
 },500);
 

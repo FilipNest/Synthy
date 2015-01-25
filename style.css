@@ -20,13 +20,13 @@ header h2:hover, header h2.active {text-decoration: underline;}
 #phrasebuilder input {width:40px; margin:0 auto 0 auto; vertical-align: bottom; height:20px;}
 #phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%; vertical-align: bottom; height:26px; margin-left:3px;}
 #phrasebuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px; letter-spacing: 1px;}
-.repeatlabel, #repeat {position:relative; top:10px;}
+.repeatlabel, #repeat {position:relative; top:10px; left:6px;}
 .clear {clear:both;}
 .controls {clear:both; width:300px; margin:auto;}
 .buildcolumn {float:left; width:400px; margin:10px;}
 #play {float:left; display:block; width:100px; margin:auto;}
 #stop {float:left; display:block; width:100px; margin:auto;}
-#share {clear:both; display:block; width:100px; margin:auto; position:relative; top:5px; text-transform: uppercase;}
+#push {clear:both; margin:auto; width:100%; display: none;}
 a:link {color:inherit;}
 a:visited {color:inherit;}
 a:active {color:inherit;}

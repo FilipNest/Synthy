@@ -49,6 +49,10 @@ a:active {color:inherit;}
                0 0 20px
   }
 
+li, ul {padding:0px; margin:0px;}
+li:before {content:" "; width:20px; height:20px; display: inline-block; background-color:red; vertical-align: bottom; top:-2px; padding:3px; position:relative;}
+#songbuilder input {height:20px; top:-2px; position:relative;}
+
 
 @media (max-width: 950px) {
   #phrasebuilder {width:450px;}

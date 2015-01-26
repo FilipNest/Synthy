@@ -911,7 +911,7 @@ e.preventDefault();
 
 $("#newsongline").click(function(){
    
-$(".songrow:last").after('<li class="songrow"><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button class="startsong">START</button> <button>UP</button><button>DOWN</button></li>');
+$(".songrow:last").after('<li class="songrow"><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button class="startsong">START</button> <button class="moveup">UP</button><button class="movedown">DOWN</button></li>');
     
 });
 
@@ -987,4 +987,24 @@ $("#songbuilder").on("click",".startsong",function(){
     
     synthy.songplayer(startpoint);
         
+});
+
+$("#songbuilder").on("click",".moveup",function(){
+   
+    var point = $("#song li").index($(this).parent());
+    if(point != 0){
+    $($(this).parent()).insertBefore("#songbuilder li:eq("+(point-1)+")");
+    }
+    
+    synthy.clearall();
+    
+});
+
+$("#songbuilder").on("click",".movedown",function(){
+   
+    var point = $("#song li").index($(this).parent());
+    $($(this).parent()).insertAfter("#songbuilder li:eq("+(point + 1)+")");
+    
+    synthy.clearall();
+    
 });

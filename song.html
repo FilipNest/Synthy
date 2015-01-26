@@ -1,6 +1,11 @@
 <!doctype HTML>
 <html>
 <head>
+<meta property="og:title" content="Synthy" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://synthy.io" />
+<meta property="og:description" content="Synthy is an online synthesiser with live world output and colours made by Filip Hnízdo using the Web Audio API (the live world server is powered by Socket.IO and Node.js)." />
+<meta property="og:image" content="http://synthy.io/metasynthy.jpg" />
 <title>Synthy</title>
 <link rel="stylesheet" href="style.css"/>
 <script type="text/javascript">
@@ -43,7 +48,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
 <h2>Paste in pattern URLS</h2>
 <h3>New line, new pattern.</h3>
 <ul id="song">
-<li class="songrow"><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button class="startsong">START</button> <button class="moveup">UP</button><button class="movedown">DOWN</button></li>
+<li class="songrow"><div class="square" data-colour=0></div><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button class="startsong">START</button> <button class="moveup">&#x25B2; </button><button class="movedown">&#x25BC;</button></li>
 </ul>
 <button id="newsongline">New line</button><button id="removesongline">Remove line</button>
 <hr>
@@ -95,7 +100,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
     
 <section class="random">
 <h3>Random</h3>
-<label>PL 1-7</label>
+<label>PV 1-7</label>
 </section>
     
 <section class="waveform">
@@ -143,7 +148,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
     
 <section class="random">
 <h3>Random</h3>
-<label>PL 1-7</label>
+<label>PV 1-7</label>
 </section>
     
 <section class="waveform">
@@ -193,7 +198,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
     
 <section class="random">
 <h3>Random</h3>
-<label>PL 1-7</label>
+<label>PV 1-7</label>
 </section>
     
 <section class="waveform">

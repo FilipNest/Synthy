@@ -1,6 +1,11 @@
 <!doctype HTML>
 <html>
 <head>
+<meta property="og:title" content="Synthy" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://synthy.io" />
+<meta property="og:description" content="Synthy is an online synthesiser with live world output and colours made by Filip Hnízdo using the Web Audio API (the live world server is powered by Socket.IO and Node.js)." />
+<meta property="og:image" content="http://synthy.io/metasynthy.jpg" />
 <title>Synthy</title>
 <link rel="stylesheet" href="style.css"/>
 <script type="text/javascript">
@@ -226,7 +231,7 @@ if(data){
     
     synthy.clearall();
 
-    var unpacked = synthy.unpack(data);
+    var unpacked = synthy.unpack(data.bundle);
     
     synthy.populate(1,unpacked);
     synthy.populate(2,unpacked);

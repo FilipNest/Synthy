@@ -715,10 +715,12 @@ synthy.bundle = bundle;
 //Clear output
 
 if(!synthy.songmode && !synthy.player){    
-history.pushState({}, document.title, window.location.origin+"?"+bundle)
+history.pushState({}, document.title, window.location.origin+"?name="+$("#name").val()+"&"+bundle)
 
 //Set output
 $("#push").show();
+$("#name").show();
+$("#namelabel").show();
 $("#share").css("display","block");    
 $("#push").text("Push to synthy");
 }
@@ -726,7 +728,7 @@ $("#push").text("Push to synthy");
 
 $("#push").click(function(e){
     
-synthy.socket.emit("bundle",synthy.bundle);
+synthy.socket.emit("bundle",{bundle:synthy.bundle,name:$("#name").val()});
     
 $("#phrasebuilder").fadeOut();
     
@@ -911,7 +913,7 @@ e.preventDefault();
 
 $("#newsongline").click(function(){
    
-$(".songrow:last").after('<li class="songrow"><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button class="startsong">START</button> <button class="moveup">UP</button><button class="movedown">DOWN</button></li>');
+$(".songrow:last").after('<li class="songrow"><div class="square" data-colour=0></div><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button class="startsong">START</button> <button class="moveup">&#x25B2;</button><button class="movedown">&#x25BC;</button></li>');
     
 });
 
@@ -1006,5 +1008,25 @@ $("#songbuilder").on("click",".movedown",function(){
     $($(this).parent()).insertAfter("#songbuilder li:eq("+(point + 1)+")");
     
     synthy.clearall();
+    
+});
+
+//Change colours on song mode square click
+
+$("#songbuilder").on("click", ".square", function(){
+   
+    var colours = ["#FF0000", "#FF9900", "#FFFF00", "#00AA00", "#0099FF", "#660099", "#CC00AA", "#000000"];
+    
+    var currentcolour = parseInt($(this).attr("data-colour")) + 1;
+    
+    if(currentcolour > colours.length -1){
+     
+        currentcolour = 0;
+        
+    }
+    
+    $(this).attr("data-colour",currentcolour);
+    
+    $(this).css("background-color",colours[currentcolour]);
     
 });

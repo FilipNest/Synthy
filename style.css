@@ -50,8 +50,11 @@ a:active {color:inherit;}
   }
 
 li, ul {padding:0px; margin:0px;}
-li:before {content:" "; width:20px; height:20px; display: inline-block; background-color:red; vertical-align: bottom; top:-2px; padding:3px; position:relative;}
-#songbuilder input {height:20px; top:-2px; position:relative;}
+li .square {width:20px; height:20px; display: inline-block; background-color:red; vertical-align: bottom; top:-2px; padding:3px; position:relative; cursor: pointer;}
+#songbuilder li input {height:20px; top:-2px; position:relative; border-left-width: 0px; border-style: solid; border-color:lightgrey;}
+
+#phrasebuilder #name {display: block; height:20px; width: 200px; float: right; margin-top:5px;}
+#phrasebuilder label#namelabel {display: block; clear: both; float: left; width:94px; font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:23px; margin-top:6px;}
 
 
 @media (max-width: 950px) {

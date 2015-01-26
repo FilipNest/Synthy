@@ -34,18 +34,18 @@
         <h1>
 <a id="about-synthy" class="anchor" href="#about-synthy" aria-hidden="true"><span class="octicon octicon-link"></span></a>About Synthy</h1>
 
-<p>Synthy is an online synthesiser with live world output and colours made by Filip Hnízdo using the Web Audio API (the live world server is powered by Socket.IO and Node.js).</p>
+<p>Synthy is an online synthesiser and sequencer with live world output and colours made by Filip Hnízdo using the Web Audio API (the live server is powered by Socket.IO and Node.js).</p>
 
-<p><a href="http://filipnest.com/synthy">VISIT SYNTHY</a></p>
+<p><a href="http://synthy.io">VISIT SYNTHY</a></p>
 
-<p>Synthy was originally built in the summer of 2014 as a present for Fiona Shipwright and has been expanded since then.</p>
+<p>Synthy was originally built in the summer of 2014 with inspiration provided by <a href="http://instagram.com/edwardiansnow">Fiona Shipwright</a> and has been expanded since then.</p>
 
 <h2>
 <a id="controls" class="anchor" href="#controls" aria-hidden="true"><span class="octicon octicon-link"></span></a>Controls</h2>
 
 <p>Synthy has three oscillators which can be set to play sine waves, sawtooth waves, square waves, triangle waves but can also be piped through to a source of white noise.</p>
 
-<p>Synthy works in rows, much like a tracker. Each oscillator can have several rows and each will be played after the previous row has finished. Each oscillator works independently from the others but waits until the oscillator with the longest pattern has finished before starting again.</p>
+<p>Synthy works in rows, much like a <a href="http://en.wikipedia.org/wiki/Music_tracker">tracker</a>. Each oscillator can have several rows and each will be played after the previous row has finished. Each oscillator works independently from the others but waits until the oscillator with the longest pattern has finished before starting again.</p>
 
 <p>You can set frequency for each oscillator row (does't work for white noise as the frequencies are all already there, somewhere) using hz or typing note values with the note name followed by an octave number.</p>
 
@@ -56,13 +56,18 @@
 <p>You can randomise the pitch and volume by using two consequtive digits (for amount of randomness followed by each other) 70 for very random freqency and regular volume.</p>
 
 <h2>
+<a id="song-mode" class="anchor" href="#song-mode" aria-hidden="true"><span class="octicon octicon-link"></span></a>Song mode</h2>
+
+<p>Patterns (copied as URLS) can be played together and rearranged in a sequence using the song mode. You can assign each one a colour as the URLs may look similar to anyone but Synthy.</p>
+
+<h2>
 <a id="sharing" class="anchor" href="#sharing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Sharing</h2>
 
-<p>Each pattern has a unique URL which you can get using the SHARE button.</p>
+<p>Each pattern has a unique URL which should be regenerated whenever you change anything.</p>
 
-<p>Patterns can also be pushed to synthy so that the whole world can hear them, live, if they are on the listen page.</p>
+<p>Patterns can also be pushed to synthy so that the whole world can hear them, live, if they are on the listen page. This may eventually have multiple channels but as it's the initial launch you can all play in the one.</p>
 
-<p>Please suggest improvements by posting a new issue on GitHub</p>
+<p>Please suggest improvements by posting a new issue on GitHub or contacting me <a href="http://www.twitter.com/filipnest">@filipnest</a> on Twitter</p>
       </section>
     </div>
 

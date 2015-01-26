@@ -1038,3 +1038,11 @@ $("#songbuilder").on("click", ".square", function(){
     $(this).css("background-color",colours[currentcolour]);
     
 });
+
+$("#stopsong").click(function(){
+   
+    synthy.clear();
+    $("li .triggerpattern").css("background-color","white").css("color","black");
+
+    
+});

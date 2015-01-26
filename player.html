@@ -80,7 +80,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
     
 <section class="random">
 <h3>Random</h3>
-<label>PL 1-7</label>
+<label>PV 1-7</label>
 </section>
     
 <section class="waveform">
@@ -128,7 +128,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
     
 <section class="random">
 <h3>Random</h3>
-<label>PL 1-7</label>
+<label>PV 1-7</label>
 </section>
     
 <section class="waveform">
@@ -178,7 +178,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
     
 <section class="random">
 <h3>Random</h3>
-<label>PL 1-7</label>
+<label>PV 1-7</label>
 </section>
     
 <section class="waveform">
@@ -201,7 +201,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
  
 </form>
 
-
+<footer><h3></h3></footer>
 <!-- Scripts -->
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="client.js"></script>
@@ -230,8 +230,16 @@ synthy.socket.on('synth', function (data) {
 if(data){
     
     synthy.clearall();
-
+    
     var unpacked = synthy.unpack(data.bundle);
+    
+    if (!data.name){
+        
+     data.name = "An untitled pattern";
+        
+    }
+    
+    $("footer h3").text("Currently playing: "+ data.name);
     
     synthy.populate(1,unpacked);
     synthy.populate(2,unpacked);

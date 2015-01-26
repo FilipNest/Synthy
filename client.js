@@ -416,6 +416,10 @@ synthy.songplayer(synthy.currentpattern);
     
     synthy.songplayer(0);
     
+} else {
+    
+    $("li .triggerpattern").css("background-color","white").css("color","black");
+    
 }
     
     
@@ -719,8 +723,8 @@ history.pushState({}, document.title, window.location.origin+"?name="+$("#name")
 
 //Set output
 $("#push").show();
-$("#name").show();
-$("#namelabel").show();
+$("#name").css("display","block");
+$("#namelabel").css("display","block");
 $("#share").css("display","block");    
 $("#push").text("Push to synthy");
 }
@@ -968,7 +972,11 @@ $("#songbuilder").on("click",".startsong",function(){
     });
     
     synthy.songplayer = function(song){
-      
+    
+    $("li .triggerpattern").css("background-color","white").css("color","black");
+        
+    $("li .triggerpattern").eq(song).css("background-color","#333333").css("color","white");
+        
     if(!synthy.song[song]){
      
         return false;
@@ -1015,7 +1023,7 @@ $("#songbuilder").on("click",".movedown",function(){
 
 $("#songbuilder").on("click", ".square", function(){
    
-    var colours = ["#FF0000", "#FF9900", "#FFFF00", "#00AA00", "#0099FF", "#660099", "#CC00AA", "#000000"];
+    var colours = ["#FF0000", "#FF9900", "#FFFF00", "#00AA00", "#0099FF", "#660099", "#CC00AA"];
     
     var currentcolour = parseInt($(this).attr("data-colour")) + 1;
     

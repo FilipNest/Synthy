@@ -23,6 +23,7 @@ header h2:hover, header h2.active {text-decoration: underline;}
 #phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%; vertical-align: bottom; height:26px; margin-left:3px;}
 #phrasebuilder button, #songbuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px; letter-spacing: 1px;}
 .repeatlabel, #repeat {position:relative; top:10px; left:6px;}
+#songbuilder .repeatlabel, #repeat {position:relative; top:3px; left:6px;}
 .clear {clear:both;}
 .controls {clear:both; width:300px; margin:auto;}
 .buildcolumn {float:left; width:400px; margin:10px;}

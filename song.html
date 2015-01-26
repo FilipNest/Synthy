@@ -3,7 +3,19 @@
 <head>
 <title>Synthy</title>
 <link rel="stylesheet" href="style.css"/>
-<link rel="stylesheet" href="//f.fontdeck.com/s/css/L17svjkWP3rDo8YMHOWDdMmE4Lc/filipnest.com/48307.css" type="text/css" />
+<script type="text/javascript">
+WebFontConfig = { fontdeck: { id: '48307' } };
+
+(function() {
+  var wf = document.createElement('script');
+  wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+  '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+  wf.type = 'text/javascript';
+  wf.async = 'true';
+  var s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(wf, s);
+})();
+</script>
 </head>
 
 <body>
@@ -35,7 +47,7 @@
 </ul>
 <button id="newsongline">New line</button><button id="removesongline">Remove line</button>
 <hr>
-<button>STOP</button> &nbsp;&nbsp;&nbsp; <label>Repeat?</label><input id="repeat" type="checkbox"><br />
+<button>STOP</button> &nbsp;&nbsp;&nbsp; <label class="repeatlabel">Repeat?</label><input id="repeat" type="checkbox"><br />
 <!--
 <button>SHARE</button>
 <button>LOAD</button>

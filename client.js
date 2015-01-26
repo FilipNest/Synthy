@@ -6,7 +6,7 @@ $(document).ready(function(){
        
         $("body").fadeIn("slow");
         
-    },500);
+    },1000);
     
     $("#abouttoggle").click(function(){
         
@@ -714,7 +714,7 @@ synthy.bundle = bundle;
     
 //Clear output
 
-if(!synthy.songmode){    
+if(!synthy.songmode && !synthy.player){    
 history.pushState({}, document.title, window.location.origin+"?"+bundle)
 
 //Set output

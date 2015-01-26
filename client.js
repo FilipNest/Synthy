@@ -406,7 +406,20 @@ synthy.currentphrase();
 };
 
 synthy.end = function(){
-if(synthy.player || document.getElementById('repeat').checked){
+    
+if(synthy.playlistmode){
+    
+if(synthy.currentpattern < synthy.song.length - 1){    
+synthy.currentpattern += 1;
+synthy.songplayer(synthy.currentpattern);
+} else if (document.getElementById('repeat').checked) {
+    
+    synthy.songplayer(0);
+    
+}
+    
+    
+} else if(synthy.player || document.getElementById('repeat').checked){
 
 if(synthy.changed){
   
@@ -898,7 +911,7 @@ e.preventDefault();
 
 $("#newsongline").click(function(){
    
-$(".songrow:last").after('<li class="songrow"><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button>START</button> <button>UP</button><button>DOWN</button></li>');
+$(".songrow:last").after('<li class="songrow"><input class="songpattern"/> <button class="triggerpattern">Trigger</button><button class="startsong">START</button> <button>UP</button><button>DOWN</button></li>');
     
 });
 
@@ -914,7 +927,7 @@ $(".songrow:last").remove();
 
 $("#songbuilder").on("click",".triggerpattern",function(){
      
-    synthy.playlistmode = true;
+    synthy.playlistmode = false;
     
     var loaded = ($(this).parent().find(".songpattern").val());
     var startpoint = $("#song li").index($(this).parent());
@@ -935,4 +948,43 @@ $("#songbuilder").on("click",".triggerpattern",function(){
     
     synthy.startphrase();
     
+});
+
+$("#songbuilder").on("click",".startsong",function(){
+     
+    synthy.playlistmode = true;
+    
+    var loaded = ($(this).parent().find(".songpattern").val());
+    var startpoint = $("#song li").index($(this).parent());
+    
+    synthy.song = [];
+    
+    $(".songpattern").each(function(number,element){
+       
+        synthy.song.push(synthy.unpack($(element).val()));
+        
+    });
+    
+    synthy.songplayer = function(song){
+      
+    if(!synthy.song[song]){
+     
+        return false;
+        
+    }
+        
+    synthy.currentpattern = song;
+        
+    synthy.clearall();
+    
+    synthy.populate(1,synthy.song[song]);
+    synthy.populate(2,synthy.song[song]);
+    synthy.populate(3,synthy.song[song]);
+    
+    synthy.startphrase();
+        
+    };
+    
+    synthy.songplayer(startpoint);
+        
 });

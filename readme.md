@@ -17,7 +17,7 @@ You can set a gain/volume for each oscillator row using a value between 0 and 1.
 
 You can set a cut off point and resonance/q factor for each oscillator step. These are raw values and can lead to unpredictable things.
 
-You can randomise the pitch and volume by using two consequtive digits (for amount of randomness followed by each other) 70 for very random freqency and regular volume.
+You can randomise the pitch and volume by using two consecutive digits (for amount of randomness followed by each other) 70 for very random frequency and regular volume.
 
 ##Song mode
 

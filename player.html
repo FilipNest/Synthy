@@ -239,7 +239,7 @@ if(data){
         
     }
     
-    $("footer h3").text("Currently playing: "+ data.name);
+    $("footer h3").html("Currently playing: "+ data.name + "<small style='float:right; margin-right:10px;'>I'll try to remember all patterns pushed to me but am only playing the latest one for now.</smalL>");
     
     synthy.populate(1,unpacked);
     synthy.populate(2,unpacked);

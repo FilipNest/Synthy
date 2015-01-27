@@ -6,6 +6,8 @@ var fs = require('fs');
 
 app.listen(1337);
 
+function handler (req, res) {};
+
 //Make a new nedb database to store pushed patterns in
 var Datastore = require('nedb')
   , db = new Datastore({ filename: 'memory', autoload: true });

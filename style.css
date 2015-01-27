@@ -58,6 +58,8 @@ li .square {width:20px; height:20px; display: inline-block; background-color:red
 footer {width:100%; background-color:white; position:fixed; bottom:0px; height:24px; padding:10px;}
 footer h3 {margin:0px; padding:0px;}
 
+.oscname {font-size:30px; margin:0px; padding:0px; margin-bottom:25px;}
+
 @media (max-width: 950px) {
   #phrasebuilder {width:450px;}
 }

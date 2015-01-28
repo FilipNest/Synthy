@@ -231,6 +231,10 @@ if(data){
     
     synthy.clearall();
     
+    if(data.count){
+        synthy.count = data.count;
+    }
+    
     var unpacked = synthy.unpack(data.bundle);
     
     if (!data.name){
@@ -239,7 +243,7 @@ if(data){
         
     }
     
-    $("footer h3").html("Currently playing: "+ data.name + "<small style='float:right; margin-right:10px;'>I'll try to remember all patterns pushed to me but am only playing the latest one for now.</smalL>");
+    $("footer h3").html("Currently playing: "+ data.name + " <small> | " + synthy.count + " patterns in memory. | <label>Load pattern: </label><input id='patternloader' /><button id='loadpattern'>GO</button></small>");
     
     synthy.populate(1,unpacked);
     synthy.populate(2,unpacked);
@@ -254,6 +258,13 @@ if(data){
 }
   });
 })
+
+$("footer").on("click", "#loadpattern", function(){
+   
+    synthy.socket.emit("memory",$("#patternloader").val());
+    
+});
+    
 </script>
     
 </html>

@@ -16,9 +16,15 @@ var Datastore = require('nedb')
 
 var latest = null;
 
-db.find({}).skip(0).limit(1).exec(function (err, docs) {
+db.find({}).sort({_id:1}).skip(0).limit(1).exec(function (err, docs) {
   
-    latest = docs[0];  
+    latest = docs[0];
+    
+    //Get count of patterns
+
+    db.count({}, function (err, count) {
+      latest.count = count;
+    });
         
     });   
 
@@ -30,7 +36,9 @@ io.on('connection', function (socket) {
 
     socket.on('bundle', function (data) {
 
+        var oldcount = latest.count;
         latest = data;
+        latest.count = oldcount+1;
         db.insert(data);
 
         io.sockets.emit('synth', latest);
@@ -39,9 +47,9 @@ io.on('connection', function (socket) {
     //Call to get another bundle from database
    socket.on('memory', function(data){
       
-    db.find({}).skip(data).limit(1).exec(function (err, docs) {
+    db.find({}).sort({_id:-1}).skip(data).limit(1).exec(function (err, docs) {
   
-    socket.emit("memory",docs[0]);    
+    socket.emit('synth',docs[0]);    
         
     });   
        

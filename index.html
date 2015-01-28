@@ -34,7 +34,7 @@
         <h1>
 <a id="about-synthy" class="anchor" href="#about-synthy" aria-hidden="true"><span class="octicon octicon-link"></span></a>About Synthy</h1>
 
-<p>Synthy is an online synthesiser and sequencer with live world output and colours made by <a href="http://filipnest.com">Filip Hnízdo</a> using the Web Audio API, the live server is powered by Socket.IO and Node.js.</p>
+<p>Synthy is an online synthesiser and sequencer with live world output and colours made by <a href="http://filipnest.com">Filip Hnízdo</a> using the Web Audio API, the live server is powered by <a href="http://socket.io/">socket.io</a> and <a href="http://Node.js">Node.js</a>. The database of patterns pushed to synthy is powered by the wonderful <a href="https://github.com/louischatriot/nedb">NeDB</a>.</p>
 
 <p><a href="http://synthy.io">VISIT SYNTHY</a></p>
 
@@ -47,7 +47,7 @@
 
 <p>Synthy works in rows, much like a <a href="http://en.wikipedia.org/wiki/Music_tracker">tracker</a>. Each oscillator can have several rows and each will be played after the previous row has finished. Each oscillator works independently from the others but waits until the oscillator with the longest pattern has finished before starting again.</p>
 
-<p>You can set frequency for each oscillator row (does't work for white noise as the frequencies are all already there, somewhere) using hz or typing note values with the note name followed by an octave number.</p>
+<p>You can set frequency for each oscillator row (does't work for white noise as the frequencies are all already there, somewhere) using Hz or typing note values with the note name followed by an octave number.</p>
 
 <p>You can set a gain/volume for each oscillator row using a value between 0 and 1.  There is a limiter in place for each oscillator to stop things getting too loud and hurting you.</p>
 

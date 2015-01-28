@@ -11,7 +11,7 @@ Synthy has three oscillators which can be set to play sine waves, sawtooth waves
 
 Synthy works in rows, much like a [tracker](http://en.wikipedia.org/wiki/Music_tracker). Each oscillator can have several rows and each will be played after the previous row has finished. Each oscillator works independently from the others but waits until the oscillator with the longest pattern has finished before starting again.
 
-You can set frequency for each oscillator row (does't work for white noise as the frequencies are all already there, somewhere) using hz or typing note values with the note name followed by an octave number.
+You can set frequency for each oscillator row (does't work for white noise as the frequencies are all already there, somewhere) using Hz or typing note values with the note name followed by an octave number.
 
 You can set a gain/volume for each oscillator row using a value between 0 and 1.  There is a limiter in place for each oscillator to stop things getting too loud and hurting you.
 

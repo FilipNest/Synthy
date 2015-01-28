@@ -228,11 +228,11 @@ $(document).ready(function(){
 synthy.player = true;
 synthy.socket.on('synth', function (data) {
 if(data){
-    
+
     synthy.clearall();
     
-    if(data.count){
-        synthy.count = data.count;
+    if(!synthy.count || synthy.count < data.number){
+        synthy.count = data.number;
     }
     
     var unpacked = synthy.unpack(data.bundle);
@@ -242,8 +242,8 @@ if(data){
      data.name = "An untitled pattern";
         
     }
-    
-    $("footer h3").html("Currently playing: "+ data.name + " <small> | " + synthy.count + " patterns in memory. | <label>Load pattern: </label><input id='patternloader' /><button id='loadpattern'>GO</button></small>");
+        
+    $("footer h3").html("Currently playing: #"+data.number +" "+ data.name + " <small> | " + synthy.count + " patterns in memory | <label>Load pattern: </label><input id='patternloader' /><button id='loadpattern'>GO</button></small>");
     
     synthy.populate(1,unpacked);
     synthy.populate(2,unpacked);

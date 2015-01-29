@@ -66,5 +66,7 @@ footer button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:whit
 .oscname {font-size:30px; margin:0px; padding:0px; margin-bottom:25px;}
 
 @media (max-width: 950px) {
+  html {overflow-y:auto;}
   #phrasebuilder {width:450px;}
+  header {min-width:500px;}
 }

@@ -1,6 +1,6 @@
 {
   "name": "Synthy",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "A synthesiser and sequencer",
   "main": "server.js",
   "dependencies": {

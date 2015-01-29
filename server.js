@@ -16,7 +16,7 @@ var Datastore = require('nedb')
 
 var latest;
 
-db.find({}).sort({number:1}).skip(0).limit(1).exec(function (err, docs) {
+db.find({}).sort({number:-1}).skip(0).limit(1).exec(function (err, docs) {
   
     latest = docs[0];
         
@@ -45,8 +45,10 @@ io.on('connection', function (socket) {
     
     //Call to get another bundle from database
    socket.on('memory', function(data){
-      
-    db.find({}).sort({number:-1}).skip(data).limit(1).exec(function (err, docs) {
+    
+    data = parseInt(data,10);
+    
+    db.find({number:data}).limit(1).exec(function (err, docs) {
   
     socket.emit('synth',docs[0]);    
         

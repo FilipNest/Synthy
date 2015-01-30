@@ -30,6 +30,12 @@ io.on('connection', function (socket) {
 
     socket.on('bundle', function (data) {
 
+    if(data.bundle == latest.bundle){
+        
+        return false;
+        
+    }
+    
         //Get count of patterns
 
     db.count({}, function (err, count) {

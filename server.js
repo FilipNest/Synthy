@@ -30,9 +30,19 @@ io.on('connection', function (socket) {
 
     socket.on('bundle', function (data) {
 
+    //Duplicate checker
+        
     if(data.bundle == latest.bundle){
         
         return false;
+        
+    }
+        
+    //Empty pattern checker
+        
+    if(synthy.bundle == "title=synthy&osc1=&osc2=&osc3="){
+        
+        return false;   
         
     }
     

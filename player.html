@@ -243,7 +243,7 @@ if(data){
         
     }
         
-    $("footer h3").html("Currently playing: #"+data.number +" "+ data.name + " <small> | " + synthy.count + " patterns in memory | <label>Load pattern: </label><input id='patternloader' /><button id='loadpattern'>GO</button></small>");
+    $("footer h3").html("#"+data.number +" "+ data.name + " <small><button id='meddle'>View/Meddle</button></small> | " + synthy.count + " patterns in memory | <label>Load pattern: </label><input id='patternloader' /><button id='loadpattern'>GO</button>");
     
     synthy.populate(1,unpacked);
     synthy.populate(2,unpacked);
@@ -262,6 +262,12 @@ if(data){
 $("footer").on("click", "#loadpattern", function(){
    
     synthy.socket.emit("memory",$("#patternloader").val());
+    
+});
+    
+$("footer").on("click", "#meddle", function(){
+   
+    document.location.href = document.location.protocol + "//" + document.location.host + "?" + synthy.bundle;
     
 });
     

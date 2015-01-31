@@ -935,7 +935,6 @@ $("#songbuilder").on("click",".triggerpattern",function(){
      
     synthy.playlistmode = false;
     
-    var loaded = ($(this).parent().find(".songpattern").val());
     var startpoint = $("#song li").index($(this).parent());
     
     var song = [];
@@ -960,7 +959,6 @@ $("#songbuilder").on("click",".startsong",function(){
      
     synthy.playlistmode = true;
     
-    var loaded = ($(this).parent().find(".songpattern").val());
     var startpoint = $("#song li").index($(this).parent());
     
     synthy.song = [];

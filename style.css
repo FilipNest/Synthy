@@ -7,7 +7,7 @@ h1 {font-size-adjust: 0.65; font-weight:bold; font-style:normal; font-size:120%;
 #line1 {background-color:red; }
 #line2 {background-color:green;}
 #line3 {background-color:blue;}
-header {width:100%; padding:5px; background-color:white; position: relative; height:28px; z-index:10}
+header {width:100%; padding:5px; background-color:white; height:28px; z-index:10; position:fixed;}
 header h1 {float:left;}
 header h2 {margin:0px; font-size:30px; float:right; margin-right:20px; cursor: pointer;}
 a:link {text-decoration: none;}
@@ -69,8 +69,9 @@ footer button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:whit
 #tourlink {letter-spacing: 1px;}
 #tourlink button {position:relative; top:-2px;}
 
+body {overflow-y:auto;}
+
 @media (max-width: 1285px) {
-  body {overflow-y:auto;}
   #phrasebuilder {width:450px;}
   header {min-width:500px;}
 }

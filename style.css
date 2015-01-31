@@ -65,10 +65,11 @@ top: -5px;}
 footer button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; letter-spacing: 1px; top:-3px; position:relative;}
 .oscname {font-size:30px; margin:0px; padding:0px; margin-bottom:25px;}
 
-.helptip {font-size:13px;}
 .helptip .joyride-next-tip {float:right; margin-bottom:10px;}
+#tourlink {letter-spacing: 1px;}
+#tourlink button {position:relative; top:-2px;}
 
-@media (max-width: 950px) {
+@media (max-width: 1285px) {
   html {overflow-y:auto;}
   #phrasebuilder {width:450px;}
   header {min-width:500px;}

@@ -70,7 +70,7 @@ footer button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:whit
 #tourlink button {position:relative; top:-2px;}
 
 @media (max-width: 1285px) {
-  html {overflow-y:auto;}
+  body {overflow-y:auto;}
   #phrasebuilder {width:450px;}
   header {min-width:500px;}
 }

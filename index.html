@@ -21,6 +21,9 @@ WebFontConfig = { fontdeck: { id: '48307' } };
   s.parentNode.insertBefore(wf, s);
 })();
 </script>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    
 </head>
 
 <body>
@@ -209,9 +212,7 @@ WebFontConfig = { fontdeck: { id: '48307' } };
 </form>
 
 <!-- Scripts -->
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="client.js"></script>
-</body>
     
 <!-- Connect to server -->
 <script src="https://cdn.socket.io/socket.io-1.3.0.js"></script>
@@ -228,5 +229,27 @@ WebFontConfig = { fontdeck: { id: '48307' } };
   ga('send', 'pageview');
 
 </script>
+    
+<!-- Joyride tour -->
 
+      <!-- Tip Content -->
+    <ol id="joyRideTipContent">
+      <li data-id="build1" class="helptip" data-text="Continue tour"><p>This is an oscillator. Synthy has three. Think of each as a separate instrument in a band. They all have the same abilities and potential but you can shape them in any direction you want.</p></li>
+    </ol>
+
+    <!-- Run the plugin -->
+<link rel=" stylesheet" type="text/css" href="libraries/joyride/joyride-2.1.css">
+
+    <script type="text/javascript" src="libraries/joyride/jquery.joyride-2.1.js"></script>
+    <script>
+      $(window).load(function() {
+        $('#joyRideTipContent').joyride({
+          autoStart : false,
+        tipLocation: "top"
+        });
+      });
+    </script>
+    
+    </body>
+    
 </html>

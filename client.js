@@ -160,14 +160,24 @@ synthy.init = function (osc, frequency, volume, cutoff, resonance, waveform, tie
 
             try {
                 synthy["noise" + osc].disconnect(synthy["osc" + osc].filter);
-            
+
             } catch (err) {
-                
-            
+
+
             }
 
 
         }
+
+        //Disconnect midi
+
+        if (synthy.midi) {
+
+            if (synthy["osc" + osc].frequency) {
+                sendtomidi(synthy["osc" + osc].frequency.value, 0, osc, false);
+            }
+
+        };
 
         if (waveform == 4) {
 
@@ -197,7 +207,12 @@ synthy.init = function (osc, frequency, volume, cutoff, resonance, waveform, tie
     }
 
     synthy["osc" + osc].type = synthy.types[waveform];
-    synthy["osc" + osc].speaker.gain.value = volume;
+
+    if (volume > 0 && volume < 1) {
+        
+        synthy["osc" + osc].speaker.gain.value = volume;
+    
+    }
 
     if (resonance) {
         synthy["osc" + osc].filter.Q.value = resonance;
@@ -206,8 +221,10 @@ synthy.init = function (osc, frequency, volume, cutoff, resonance, waveform, tie
         synthy["osc" + osc].filter.frequency.value = cutoff;
     }
 
-    if (synthy.midi) {
-        sendtomidi(frequency, volume);
+    if (synthy.midi && synthy["osc" + osc].frequency.value) {
+
+        sendtomidi(synthy["osc" + osc].frequency.value, volume, osc, true);
+
     }
 
 }
@@ -1167,32 +1184,95 @@ $("#stopsong").click(function () {
 
 //Web MIDI!
 
-var sendtomidi = function (frequency, volume) {
+var sendtomidi = function (frequency, volume, osc, status) {
+        
+    if (volume > 1) {
+
+        volume = 1;
+
+    }
+
     //Fit velocity to 0 - 128 range.
 
-    velocity = 128 / 100 * (volume * 100);
-
+    velocity = 127 / 100 * (volume * 100);
+    
+    velocity = Math.floor(velocity);
+    
     //Change pitch to note
 
     var note = 69 + 12 * Math.log2(frequency / 440);
 
     note = Math.floor(note);
 
-    synthy.midi.forEach(function (element, index) {
+    synthy.midi.outputs.forEach(function (element, index) {
 
-        note = "0x" + note.toString(16);
-        velocity = "0x" + velocity.toString(16);
+        if (!document.getElementById("midi" + osc)) {
+            device = "none";
 
-        element.send(["0x" + 91, note, velocity]);
+        } else {
 
+            var device = document.getElementById("midi" + osc).value;
 
+        }
+
+        if (index == device) {
+                        
+            note = "0x" + note.toString(16);
+            velocity = "0x" + velocity.toString(16);
+
+            if (status) {
+                                                
+                element.send(["0x90", note, velocity]);
+
+            } else {
+
+                element.send(["0x80", note, velocity]);
+
+            }
+        }
     });
 
 };
 
+var miditoggle = function () {
+
+    if (document.getElementById("midi").style.display !== "block") {
+
+        document.getElementById("midi").style.display = "block";
+
+    } else {
+
+        document.getElementById("midi").style.display = "none";
+
+    }
+
+};
+
+
 function onMIDISuccess(midioutputs) {
 
-    synthy.midi = midioutputs.outputs;
+    synthy.midi = {};
+
+    synthy.midi.outputs = midioutputs.outputs;
+
+    var midibox = document.createElement("div");
+
+    midibox.setAttribute("id", "midi");
+
+    var select = "";
+    midioutputs.outputs.forEach(function (element, index) {
+
+        select += "<option value=" + index + ">" + element.name + "</option>";
+
+    });
+
+    midibox.innerHTML = "<b>MIDI</b><p>Very experimental Web MIDI API support. Select an output device for each of the oscillators and then route that output MIDI device to a sound. Currently only length, pitch and volume are supported. Mapping of other values to CC paramaters and more to follow.</p>"
+
+    midibox.innerHTML += "<select id='midi1'><option>OSC1 MIDI OUT</option>" + select + "</select><select id='midi2'><option>OSC2 MIDI OUT</option>" + select + "</select><select id='midi3'><option>OSC3 MIDI OUT</option>" + select + "</select>";
+
+    document.body.appendChild(midibox);
+
+    document.getElementsByTagName("header")[0].insertAdjacentHTML("beforeend", "<h2 onclick='miditoggle()'>MIDI!</h2>");
 
 }
 

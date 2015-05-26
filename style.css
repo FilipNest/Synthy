@@ -83,3 +83,7 @@ body {overflow-y:auto;}
   #phrasebuilder {width:450px;}
   header {min-width:500px;}
 }
+
+.wf-loading body {
+    visibility: hidden;
+}

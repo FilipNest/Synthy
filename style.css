@@ -1,89 +1,315 @@
-html {width:100%; height:100%; margin:auto; overflow:hidden;}
-body {height:100%; margin:auto; overflow:hidden; font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:25px; background-color:#333333;}
-body {display:none;}
-.osc {height:100%; transition: background 20ms; width:23%; float:left; color:transparent; margin:0 5% 0 5%}
-h1 {font-size-adjust: 0.65; font-weight:bold; font-style:normal; font-size:120%; height:21px; margin:0px;}
-.line {display:inline-block; width:5px; height:100%;}
-#line1 {background-color:red; }
-#line2 {background-color:green;}
-#line3 {background-color:blue;}
-header {width:100%; padding:5px; background-color:white; height:28px; z-index:10; position:fixed;}
-header h1 {float:left;}
-header h2 {margin:0px; font-size:30px; float:right; margin-right:20px; cursor: pointer;}
-a:link {text-decoration: none;}
-header h2:hover, header h2.active {text-decoration: underline;}
-#phrasebuilder {position:absolute; padding:10px; background-color:white; top:50px;}
-#songbuilder {position:absolute; padding:10px; background-color:white; top:50px; width:400px;}
-#songbuilder h2, #songbuilder h3 {padding:0px; margin:0px;}
-#phrasebuilder {text-align: center;}
-#phrasebuilder section {width:50px; float:left; line-height:30px;}
-#phrasebuilder h3 {font-size:85%; text-transform: uppercase; margin:0px; line-height:5px;}
-#phrasebuilder label {font-size:35%; font-family:arial;}
-#phrasebuilder input {width:40px; margin:0 auto 0 auto; vertical-align: bottom; height:20px;}
-#phrasebuilder select {font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:70%; vertical-align: bottom; height:26px; margin-left:3px;}
-#phrasebuilder button, #songbuilder button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; margin-top:10px; letter-spacing: 1px;}
-.repeatlabel, #repeat {position:relative; top:10px; left:6px;}
-#songbuilder .repeatlabel, #repeat {position:relative; top:3px; left:6px;}
-.clear {clear:both;}
-.controls {clear:both; width:300px; margin:auto;}
-.buildcolumn {float:left; width:400px; margin:10px;}
-#play {float:left; display:block; width:100px; margin:auto;}
-#stop {float:left; display:block; width:100px; margin:auto;}
-#push {clear:both; margin:auto; width:100%; display: none;}
-#share {display: none; clear: both; margin-top:23px; text-transform: uppercase; font-weight: bold; font-size:19px; letter-spacing: 1px;}
-a:link {color:inherit;}
-a:visited {color:inherit;}
-a:active {color:inherit;}
-
+html {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  overflow: hidden;
+}
+body {
+  height: 100%;
+  margin: auto;
+  overflow: hidden;
+  font-family: monospace;
+  font-size: 10px;
+  background-color: #333333;
+}
+body {
+  display: none;
+}
+.osc {
+  height: 100%;
+  transition: background 20ms;
+  width: 23%;
+  float: left;
+  color: transparent;
+  margin: 0 5% 0 5%
+}
+h1 {
+  font-size-adjust: 0.65;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 120%;
+  height: 21px;
+  margin: 0px;
+}
+.line {
+  display: inline-block;
+  width: 5px;
+  height: 100%;
+}
+#line1 {
+  background-color: red;
+}
+#line2 {
+  background-color: green;
+}
+#line3 {
+  background-color: blue;
+}
+header {
+  width: 100%;
+  padding: 5px;
+  background-color: white;
+  height: 28px;
+  z-index: 10;
+  position: fixed;
+}
+header h1 {
+  float: left;
+}
+header h2 {
+  margin: 0px;
+  font-size: 30px;
+  float: right;
+  margin-right: 20px;
+  cursor: pointer;
+}
+a:link {
+  text-decoration: none;
+}
+header h2:hover,
+header h2.active {
+  text-decoration: underline;
+}
+#phrasebuilder {
+  position: absolute;
+  padding: 10px;
+  background-color: white;
+  top: 50px;
+}
+#songbuilder {
+  position: absolute;
+  padding: 10px;
+  background-color: white;
+  top: 50px;
+  width: 400px;
+}
+#songbuilder h2,
+#songbuilder h3 {
+  padding: 0px;
+  margin: 0px;
+}
+#phrasebuilder {
+  text-align: center;
+}
+#phrasebuilder section {
+  width: 50px;
+  float: left;
+  line-height: 30px;
+}
+#phrasebuilder h3 {
+  font-size: 85%;
+  text-transform: uppercase;
+  margin: 0px;
+  line-height: 5px;
+}
+#phrasebuilder label {
+  font-size: 35%;
+  font-family: arial;
+}
+#phrasebuilder input {
+  width: 40px;
+  margin: 0 auto 0 auto;
+  vertical-align: bottom;
+  height: 20px;
+}
+#phrasebuilder select {
+  font-family: monospace;
+  font-size: 70%;
+  vertical-align: bottom;
+  height: 26px;
+  margin-left: 3px;
+}
+#phrasebuilder button,
+#songbuilder button {
+  font-family: monospace;
+  background: white;
+  border-style: solid;
+  font-size: 80%;
+  cursor: pointer;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+.repeatlabel,
+#repeat {
+  position: relative;
+  top: 10px;
+  left: 6px;
+}
+#songbuilder .repeatlabel,
+#repeat {
+  position: relative;
+  top: 3px;
+  left: 6px;
+}
+.clear {
+  clear: both;
+}
+.controls {
+  clear: both;
+  width: 300px;
+  margin: auto;
+}
+.buildcolumn {
+  float: left;
+  width: 400px;
+  margin: 10px;
+}
+#play {
+  float: left;
+  display: block;
+  width: 100px;
+  margin: auto;
+}
+#stop {
+  float: left;
+  display: block;
+  width: 100px;
+  margin: auto;
+}
+#push {
+  clear: both;
+  margin: auto;
+  width: 100%;
+  display: none;
+}
+#share {
+  display: none;
+  clear: both;
+  margin-top: 23px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 19px;
+  letter-spacing: 1px;
+}
+a:link {
+  color: inherit;
+}
+a:visited {
+  color: inherit;
+}
+a:active {
+  color: inherit;
+}
 .on {
-    box-shadow: 0 0 5px,
-               0 0 20px,
-               0 0 30px,
-               0 0 40px;
-    }
-    
+  box-shadow: 0 0 5px, 0 0 20px, 0 0 30px, 0 0 40px;
+}
 .off {
-    box-shadow: 0 0 5px,
-               0 0 10px,
-               0 0 15px,
-               0 0 20px
-  }
-
-li, ul {padding:0px; margin:0px;}
-li .square {width:20px; height:20px; display: inline-block; background-color:red; vertical-align: bottom; top:-2px; padding:3px; position:relative; cursor: pointer;}
-#songbuilder li input {padding-left:5px; height:20px; top:-2px; position:relative; border-left-width: 0px; border-style: solid; border-color:lightgrey;}
-
-#phrasebuilder #name {display: none; height:20px; width: 200px; float: right; margin-top:5px; font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:20px; letter-spacing: 2px;}
-#phrasebuilder label#namelabel {display: none; clear: both; float: left; width:94px; font-family:"Los Alamos Pro Fat Man", sans-serif; font-size:23px; margin-top:6px;}
-footer {width:100%; background-color:white; position:fixed; bottom:0px; height:24px; padding:10px;}
-footer h3 {margin:0px; padding:0px;}
-
-footer input {width: 33px;
-height: 20px;
-position: relative;
-top: -5px;}
-footer button {font-family:"Los Alamos Pro Fat Man", sans-serif; background:white; border-style:solid; font-size:80%; cursor: pointer; letter-spacing: 1px; top:-3px; position:relative;}
-.oscname {font-size:30px; margin:0px; padding:0px; margin-bottom:25px;}
-
-.helptip .joyride-next-tip {float:right; margin-bottom:10px;}
-#tourlink {letter-spacing: 1px;}
-#tourlink button {position:relative; top:-2px;}
-
-body {overflow-y:auto;}
-
-#midi {display:none; width:300px; padding:10px; background-color: white; position:fixed; z-index:10;
+  box-shadow: 0 0 5px, 0 0 10px, 0 0 15px, 0 0 20px
+}
+li,
+ul {
+  padding: 0px;
+  margin: 0px;
+}
+li .square {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-color: red;
+  vertical-align: bottom;
+  top: -2px;
+  padding: 3px;
+  position: relative;
+  cursor: pointer;
+}
+#songbuilder li input {
+  padding-left: 5px;
+  height: 20px;
+  top: -2px;
+  position: relative;
+  border-left-width: 0px;
+  border-style: solid;
+  border-color: lightgrey;
+}
+#phrasebuilder #name {
+  display: none;
+  height: 20px;
+  width: 200px;
+  float: right;
+  margin-top: 5px;
+  font-family: monospace;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+#phrasebuilder label#namelabel {
+  display: none;
+  clear: both;
+  float: left;
+  width: 94px;
+  font-family: monospace;
+  font-size: 23px;
+  margin-top: 6px;
+}
+footer {
+  width: 100%;
+  background-color: white;
+  position: fixed;
+  bottom: 0px;
+  height: 24px;
+  padding: 10px;
+}
+footer h3 {
+  margin: 0px;
+  padding: 0px;
+}
+footer input {
+  width: 33px;
+  height: 20px;
+  position: relative;
+  top: -5px;
+}
+footer button {
+  font-family: monospace;
+  background: white;
+  border-style: solid;
+  font-size: 80%;
+  cursor: pointer;
+  letter-spacing: 1px;
+  top: -3px;
+  position: relative;
+}
+.oscname {
+  font-size: 30px;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 25px;
+}
+.helptip .joyride-next-tip {
+  float: right;
+  margin-bottom: 10px;
+}
+#tourlink {
+  letter-spacing: 1px;
+}
+#tourlink button {
+  position: relative;
+  top: -2px;
+}
+body {
+  overflow-y: auto;
+}
+#midi {
+  display: none;
+  width: 300px;
+  padding: 10px;
+  background-color: white;
+  position: fixed;
+  z-index: 10;
   top: 10%;
   left: 50%;
   margin-left: -150px;
-    border-style:solid; border-color:#333333; border-width:2px;
-
+  border-style: solid;
+  border-color: #333333;
+  border-width: 2px;
 }
-
 @media (max-width: 1285px) {
-  #phrasebuilder {width:450px;}
-  header {min-width:500px;}
+  #phrasebuilder {
+    width: 450px;
+  }
+  header {
+    min-width: 500px;
+  }
 }
-
 .wf-loading body {
-    visibility: hidden;
+  visibility: hidden;
 }

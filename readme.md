@@ -1,7 +1,7 @@
 #About Synthy
 Synthy is an online synthesiser and sequencer with live world output and colours made by [Filip Hnízdo](http://filipnest.com) using the Web Audio API, the live server is powered by [socket.io](http://socket.io/) and [Node.js](http://Node.js). The database of patterns pushed to synthy is powered by the wonderful [NeDB](https://github.com/louischatriot/nedb).
 
-[VISIT SYNTHY](http://synthy.io)
+[VISIT SYNTHY](https://synthy.filipnest.com) (this no longer works as some technologies have moved on but please pull request to fix if you know how).
 
 Synthy was originally started, late in the summer of 2014 with inspiration provided by [Fiona Shipwright](http://instagram.com/edwardiansnow) and has been expanded since then. It may grow even more if you like it.
 
